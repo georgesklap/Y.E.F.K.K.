@@ -1,4 +1,4 @@
-const CACHE_NAME = 'eidiko-froura-v48-custom-transparent-icon';
+const CACHE_NAME = 'eidiko-froura-v48-custom-transparent-icon-repo-v1';
 const URLS_TO_CACHE = [
   './',
   './index.html',
