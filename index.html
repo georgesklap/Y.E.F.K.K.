@@ -6,7 +6,7 @@
   <title>Υ.Ε.Φ.Κ.Κ</title>
   <style id="offline-main-styles">
 
-:root{
+:root{--leave:#f97316;
   --bg:#102b50;
   --card:#ffffff;
   --ink:#111827;
@@ -57,7 +57,7 @@ body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,
 .shiftRow{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
 .shiftBtn.active{box-shadow:0 0 0 4px rgba(59,130,246,.18)}
 .badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;border-radius:999px;min-width:46px;padding:6px 10px;font-size:12px;font-weight:1000}
-.bP{background:var(--p)} .bA{background:var(--a)} .bN{background:var(--n)} .bAD{background:var(--ad); color:#062033} .bR{background:var(--r)}
+.bP{background:var(--p)} .bA{background:var(--a)} .bN{background:var(--n)} .bAD{background:var(--ad); color:#062033} .bR{background:var(--r)} .bLEAVE{background:var(--leave)} .bDELETE{background:#ffffff;color:#000000;border:1px solid #9ca3af} .bP{color:#422006}
 .copyRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin:8px 0 12px}
 .copyRow label{font-size:12px;font-weight:900;color:var(--muted)}
 .copyRow select{padding:10px;border-radius:14px;border:2px solid rgba(15,23,42,.25);background:#fff}
@@ -146,6 +146,7 @@ html,body{background:#102b50!important;color:#f8fafc;}
 .calc-tab.active{background:#dbeafe;color:#172132;}
 @media print{html,body{background:white!important;color:#172132!important;}}
 
+.singleLEAVE{background:var(--leave)}
 </style>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#04122a">
@@ -501,11 +502,13 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
       </div>
 
       <div class="shiftRow">
-        <button class="shiftBtn active" data-shift="P" type="button"><span class="badge bP">ΠΡ</span></button>
-        <button class="shiftBtn" data-shift="A" type="button"><span class="badge bA">ΑΠ</span></button>
-        <button class="shiftBtn" data-shift="N" type="button"><span class="badge bN">ΝΥ</span></button>
-        <button class="shiftBtn" data-shift="AD" type="button"><span class="badge bAD">ΑΔ</span></button>
-        <button class="shiftBtn" data-shift="R" type="button"><span class="badge bR">Ρ</span></button>
+        <button class="shiftBtn active" data-shift="P" type="button" title="Πρωί"><span class="badge bP">Π</span></button>
+        <button class="shiftBtn" data-shift="A" type="button" title="Απόγευμα"><span class="badge bA">Α</span></button>
+        <button class="shiftBtn" data-shift="N" type="button" title="Νύχτα"><span class="badge bN">Ν</span></button>
+        <button class="shiftBtn" data-shift="AD" type="button" title="Αδιάθετο"><span class="badge bAD">Α/Δ</span></button>
+        <button class="shiftBtn" data-shift="R" type="button" title="Ρεπό"><span class="badge bR">Ρ</span></button>
+        <button class="shiftBtn" data-shift="LEAVE" type="button" title="Άδεια"><span class="badge bLEAVE">ΑΔΕΙΑ</span></button>
+        <button class="shiftBtn" data-shift="DELETE" type="button" title="Διαγραφή επιλεγμένης ημέρας"><span class="badge bDELETE">ΔΙΑΓ</span></button>
       </div>
 
       <div class="copyRow">
@@ -537,7 +540,24 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
     </section>
 
 
-    <section class="panel panel-slip" id="printSlip">
+    <section class="panel" id="repoPanel" style="margin-top:12px;padding:15px">
+<h2>Ρεπό &amp; Ώρες</h2>
+<div id="repoSummary" style="line-height:1.7;font-weight:600">—</div>
+<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Ρυθμίσεις υπολοίπων</summary>
+<div style="display:grid;grid-template-columns:1fr 90px;gap:8px;align-items:center;margin-top:10px">
+<label for="repoOpening">Αρχικά ρεπό</label><input id="repoOpening" type="number" step="1" value="0" style="width:85px">
+<label for="repoCorrection">Διόρθωση ρεπό (+/−)</label><input id="repoCorrection" type="number" step="1" value="0" style="width:85px">
+<label for="hoursOpening">Αρχικές ώρες</label><input id="hoursOpening" type="number" step="0.5" value="0" style="width:85px">
+<label for="hoursCorrection">Διόρθωση ωρών (+/−)</label><input id="hoursCorrection" type="number" step="0.5" value="0" style="width:85px">
+<label for="mayOverride">Μεταφορά Πρωτομαγιάς</label><input id="mayOverride" type="date" style="width:150px;max-width:100%">
+</div></details>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+<button id="backupExport" type="button">💾 Backup</button>
+<button id="backupImport" type="button">📂 Επαναφορά</button>
+<input type="file" id="backupFile" accept="application/json,.json" hidden>
+</div><p id="backupStatus" style="font-size:12px"></p>
+</section>
+<section class="panel panel-slip" id="printSlip">
       <h2>Εκκαθαριστικό</h2>
 
       <div class="slipBlock">
@@ -998,8 +1018,8 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular - regularDeds) + extra
     if (val === 'PN'){
       mark.innerHTML = '<div class="splitWrap"><div class="splitTop">ΠΡ</div><div class="splitBottom">ΝΥ</div></div>';
     } else if (val) {
-      const cls = val === 'P' ? 'singleP' : val === 'A' ? 'singleA' : val === 'N' ? 'singleN' : val === 'AD' ? 'singleAD' : 'singleR';
-      const label = val === 'P' ? 'ΠΡ' : val === 'A' ? 'ΑΠ' : val === 'N' ? 'ΝΥ' : val === 'AD' ? 'ΑΔ' : 'Ρ';
+      const cls = val === 'P' ? 'singleP' : val === 'A' ? 'singleA' : val === 'N' ? 'singleN' : val === 'AD' ? 'singleAD' : val === 'LEAVE' ? 'singleLEAVE' : 'singleR';
+      const label = val === 'P' ? 'ΠΡ' : val === 'A' ? 'ΑΠ' : val === 'N' ? 'ΝΥ' : val === 'AD' ? 'ΑΔ' : val === 'LEAVE' ? 'ΑΔΕΙΑ' : 'Ρ';
       mark.innerHTML = '<div class="' + cls + '">' + label + '</div>';
     }
     cell.appendChild(mark);
@@ -1019,6 +1039,7 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular - regularDeds) + extra
     const cur = shifts[key] || '';
     const sel = selectedShift;
 
+    if (sel === 'DELETE'){ delete shifts[key]; return; }
     if (cur === sel){
       delete shifts[key];
       return;
@@ -1203,7 +1224,7 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular - regularDeds) + extra
         insurance:'post93', family:'single', kids:'0', dependents:'0',
         birthDate:'', hireDate:'', preServiceMonths:'0',
         pnOther:'0', pnPlastic:'0', pnFive:'0', pnBuyMonths:'0',
-        pnOwedRest:'0', pnLeaveDays:'0'
+        pnOwedRest:'0', pnLeaveDays:'0', repoOpening:'0', repoCorrection:'0', hoursOpening:'0', hoursCorrection:'0', mayOverride:''
       };
       Object.entries(defaults).forEach(([id,value])=>{
         const element = document.getElementById(id);
@@ -1932,5 +1953,96 @@ function render(){
 calcDateInput?.addEventListener('change',render);calcDateInput?.addEventListener('input',render);familySelect.addEventListener('change',render);render();
 $('tabEfapax').addEventListener('click',()=>{$('salaryView').style.display='none';$('pensionView').style.display='none';$('efapaxView').style.display='block';['tabSalary','tabPension'].forEach(id=>$(id).classList.remove('active'));$('tabEfapax').classList.add('active');window.scrollTo(0,0)});
 ['tabSalary','tabPension'].forEach(id=>$(id).addEventListener('click',()=>{$('efapaxView').style.display='none';$('tabEfapax').classList.remove('active')}));$('efPrint').onclick=()=>window.print();
-})();</script></body>
+})();</script><script>
+/* ΥΕΦΚΚ – πρόσθετο παρακολούθησης ρεπό/ωρών και ασφαλούς τοπικού backup */
+(function(){
+'use strict';
+const MAIN='eidiko_v22_state', EXTRA='yefkk_repo_v1';
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const dateFrom=s=>new Date(s+'T12:00:00');
+const defaults={repoOpening:0,repoCorrection:0,hoursOpening:0,hoursCorrection:0,mayOverrides:{}};
+let extras={...defaults};
+try { extras={...defaults,...JSON.parse(localStorage.getItem(EXTRA)||'{}')}; }catch(e){}
+function orthodoxEaster(y){ // Julian calendar Easter converted to Gregorian (valid 1900–2099)
+ const a=y%4,b=y%7,c=y%19,d=(19*c+15)%30,e=(2*a+4*b-d+34)%7;
+ const month=Math.floor((d+e+114)/31),day=(d+e+114)%31+1;
+ const julian=new Date(y,month-1,day,12); julian.setDate(julian.getDate()+13);return julian;
+}
+function holidays(y){
+ const fixed=[[1,1,'Πρωτοχρονιά'],[1,6,'Θεοφάνεια'],[3,25,'25η Μαρτίου'],[8,15,'15 Αυγούστου'],[10,16,'Άγιος Λογγίνος'],[10,28,'28η Οκτωβρίου'],[12,25,'Χριστούγεννα'],[12,26,'26 Δεκεμβρίου']];
+ const map=new Map(fixed.map(([m,d,n])=>[`${y}-${pad(m)}-${pad(d)}`,n]));
+ const easter=orthodoxEaster(y);
+ const cleanMonday=new Date(easter);cleanMonday.setDate(cleanMonday.getDate()-48);map.set(iso(cleanMonday),'Καθαρά Δευτέρα');
+ const goodFriday=new Date(easter);goodFriday.setDate(goodFriday.getDate()-2);map.set(iso(goodFriday),'Μεγάλη Παρασκευή');
+ map.set(iso(easter),'Κυριακή του Πάσχα');
+ const easterMonday=new Date(easter);easterMonday.setDate(easterMonday.getDate()+1);map.set(iso(easterMonday),'Δευτέρα του Πάσχα');
+ const may=extras.mayOverrides?.[y]||`${y}-05-01`;map.set(may,'Πρωτομαγιά');return map;
+}
+function weekStart(date){const d=new Date(date);const day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return d;}
+function calc(){
+ let s={};try{s=JSON.parse(localStorage.getItem(MAIN)||'{}')}catch(e){}
+ const shifts=s.shifts||{};
+ const year=s.calYear||new Date().getFullYear(),month=s.calMonth||new Date().getMonth()+1;
+ const last=new Date(year,month,0,12), keys=Object.keys(shifts).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)).sort();
+ const first=keys.length?dateFrom(keys[0]):new Date(year,0,1,12);
+ let cursor=weekStart(first),end=weekStart(last);
+ let earnedHoliday=0,earnedFive=0,repaid=0,hoursBalance=0;
+ const isDuty=v=>['P','A','N','PN'].includes(v);
+ const holidayCache={};const getH=y=>holidayCache[y]||(holidayCache[y]=holidays(y));
+ while(cursor<=end){
+  let duties=0,leave=0,rests=0,weekHours=0;
+  for(let i=0;i<7;i++){
+   const d=new Date(cursor);d.setDate(cursor.getDate()+i);if(d>last)continue;
+   const k=iso(d),v=shifts[k];
+   if(isDuty(v)) {duties++;weekHours+=8.5;if(getH(d.getFullYear()).has(k))earnedHoliday++;}
+   if(v==='LEAVE')leave++;
+   if(v==='R')rests++;
+  }
+  if(duties>=5)earnedFive+=Math.floor(duties/5);
+  // Confirmed example: 3 duty + 2 leave + 2 rests => one previously owed rest repaid.
+  if(duties===3&&leave===2&&rests>=2)repaid++;
+  // Hours are informational; do not subtract leave days from 34.5 without an agreed rule.
+  if(duties+leave+rests>=7) hoursBalance+=weekHours-34.5;
+  cursor.setDate(cursor.getDate()+7);
+ }
+ const balance=(+extras.repoOpening||0)+earnedHoliday+earnedFive-repaid+(+extras.repoCorrection||0);
+ const hours=(+extras.hoursOpening||0)+hoursBalance+(+extras.hoursCorrection||0);
+ $('repoSummary').innerHTML=`Οφειλόμενα ρεπό: ${balance}<br>Υπόλοιπο ωρών: ${hours.toFixed(1)}`;
+ const grid=$('calGrid');if(grid){
+  grid.querySelectorAll('.day').forEach(cell=>{
+   const num=cell.querySelector('.num');if(!num)return;
+   // Date inferred by calendar position, including adjacent-month cells.
+   const index=Array.prototype.indexOf.call(grid.children,cell);
+   const firstOfMonth=new Date(year,month-1,1,12);
+   const offset=(firstOfMonth.getDay()+6)%7;
+   const d=new Date(year,month-1,1+index-offset,12);const name=getH(d.getFullYear()).get(iso(d));
+   cell.querySelectorAll('.holiday-marker').forEach(n=>n.remove());
+   if(name){const mark=document.createElement('div');mark.className='holiday-marker';mark.textContent=name;mark.title=name;mark.style.cssText='font-size:9px;color:#b91c1c;font-weight:bold;text-align:center';cell.appendChild(mark);}
+  });
+ }
+}
+function store(){for(const k of ['repoOpening','repoCorrection','hoursOpening','hoursCorrection'])extras[k]=Number($(k).value)||0;localStorage.setItem(EXTRA,JSON.stringify(extras));calc();}
+function download(){
+ const payload={format:'YEFKK_BACKUP_V1',createdAt:new Date().toISOString(),storage:{}};
+ for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k)payload.storage[k]=localStorage.getItem(k);}
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='YEFKK_backup_'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('backupStatus').textContent='Δημιουργήθηκε αρχείο backup. Φύλαξέ το σε ασφαλές μέρος.';
+}
+async function restore(file){
+ let data;try{data=JSON.parse(await file.text());if(data.format!=='YEFKK_BACKUP_V1'||!data.storage||typeof data.storage!=='object'||Array.isArray(data.storage))throw Error('Μη συμβατό αρχείο');}catch(e){alert('Μη έγκυρο backup: '+e.message);return;}
+ if(!confirm('Η επαναφορά θα αντικαταστήσει τα τρέχοντα δεδομένα της εφαρμογής. Έχεις κρατήσει αντίγραφο;'))return;
+ try{for(const [k,v] of Object.entries(data.storage)){if(typeof v!=='string')throw Error('Μη έγκυρη τιμή');}for(const [k,v] of Object.entries(data.storage))localStorage.setItem(k,v);alert('Η επαναφορά ολοκληρώθηκε. Η εφαρμογή θα επανεκκινήσει.');location.reload();}catch(e){alert('Σφάλμα επαναφοράς: '+e.message);}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ for(const k of ['repoOpening','repoCorrection','hoursOpening','hoursCorrection']){$(k).value=extras[k]||0;$(k).addEventListener('change',store);}
+ function refreshMay(){const s=JSON.parse(localStorage.getItem(MAIN)||'{}');const y=s.calYear||new Date().getFullYear();$('mayOverride').value=extras.mayOverrides?.[y]||'';}
+ $('mayOverride').addEventListener('change',()=>{const s=JSON.parse(localStorage.getItem(MAIN)||'{}'),y=s.calYear||new Date().getFullYear();extras.mayOverrides=extras.mayOverrides||{};if($('mayOverride').value)extras.mayOverrides[y]=$('mayOverride').value;else delete extras.mayOverrides[y];localStorage.setItem(EXTRA,JSON.stringify(extras));calc();});
+ $('backupExport').addEventListener('click',download);$('backupImport').addEventListener('click',()=>$('backupFile').click());$('backupFile').addEventListener('change',e=>{if(e.target.files[0])restore(e.target.files[0]);e.target.value='';});
+ const grid=$('calGrid');if(grid){let scheduled=false;new MutationObserver(mutations=>{if(!mutations.some(m=>Array.from(m.addedNodes).some(n=>n.nodeType===1&&n.classList?.contains('day'))))return;if(!scheduled){scheduled=true;queueMicrotask(()=>{scheduled=false;calc();refreshMay();});}}).observe(grid,{childList:true});}
+ $('prevMonth')?.addEventListener('click',()=>setTimeout(()=>{refreshMay();calc()},0));$('nextMonth')?.addEventListener('click',()=>setTimeout(()=>{refreshMay();calc()},0));refreshMay();calc();
+});
+})();
+</script>
+</body>
 </html>
