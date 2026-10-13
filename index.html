@@ -313,7 +313,7 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
         </div>
         <div class="field">
           <label>Ημερομηνία διορισμού ΥΕΦΚΚ</label>
-          <input id="hireDate" type="date" value="2000-07-20">
+          <input id="hireDate" type="date">
         </div>
         <div class="field">
           <label>Προϋπηρεσία στο Δημόσιο πριν την ΥΕΦΚΚ (μήνες)</label>
@@ -760,7 +760,7 @@ window.PAY_TABLE = {"ranges":[{"step":"1 (ΦΡΟΥΡΟΣ)","from":0.0,"to":3.0,"
 
   function compute(){
     const calc = $('calcDate').value || todayISO();
-    const hire = $('hireDate').value || '2000-07-20';
+    const hire = $('hireDate').value;
     const y = yearsBetween(hire, calc);
     const priorMonths = Math.max(0, Math.floor(Number($('preServiceMonths')?.value || 0)));
     const salaryYears = y == null ? null : y + (priorMonths / 12);
@@ -1165,7 +1165,6 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular - regularDeds) + extra
     calYear = now.getFullYear();
     calMonth = now.getMonth() + 1;
     $('calcDate').value = todayISO(); // always today's date
-    if (!$('hireDate').value) $('hireDate').value = '2000-07-20';
 
     loadState();
     $('calcDate').value = todayISO(); // force today after loading
@@ -1191,7 +1190,44 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular - regularDeds) + extra
     $('copyBtn').addEventListener('click', copyCycle);
     $('clearMonthBtn').addEventListener('click', clearCurrentMonth);
     const resetBtn = $('resetStorageBtn');
-    if (resetBtn){ resetBtn.addEventListener('click', function(){ try{ localStorage.removeItem(LS); }catch(e){} location.reload(); }); }
+    if (resetBtn){ resetBtn.addEventListener('click', function(){
+      if (!window.confirm('Να διαγραφούν όλα τα αποθηκευμένα προσωπικά στοιχεία, οι βάρδιες και τα στοιχεία σύνταξης από αυτή τη συσκευή;')) return;
+      // Reset both persistent state and the currently visible form.
+      try { localStorage.clear(); sessionStorage.clear(); }
+      catch(e) { window.alert('Δεν ήταν δυνατή η διαγραφή της αποθήκευσης.'); return; }
+      shifts = {};
+      selectedShift = 'P';
+      calYear = new Date().getFullYear();
+      calMonth = new Date().getMonth() + 1;
+      const defaults = {
+        insurance:'post93', family:'single', kids:'0', dependents:'0',
+        birthDate:'', hireDate:'', preServiceMonths:'0',
+        pnOther:'0', pnPlastic:'0', pnFive:'0', pnBuyMonths:'0',
+        pnOwedRest:'0', pnLeaveDays:'0'
+      };
+      Object.entries(defaults).forEach(([id,value])=>{
+        const element = document.getElementById(id);
+        if (element) element.value=value;
+      });
+      // Reset all additional pension inputs and payroll inputs to HTML defaults.
+      ['pnBuyWage','pnBuyRate'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='0';});
+      ['borderYes','fiveDaysCount','nightCount','fiveYearsOn','fiveYearsAmount','otherFixed','cycleLen','copyRange'].forEach(id=>{
+        const e=document.getElementById(id);
+        if(!e)return;
+        const defaultOption=e.querySelector('option[selected]')||e.querySelector('option');
+        e.value=defaultOption?defaultOption.value:(e.getAttribute('value')||'0');
+      });
+      $('calcDate').value=todayISO();
+      setShiftButtons();
+      renderCalendar();
+      compute();
+      // Recalculate the pension panel without retaining the previous user's values.
+      ['pnOther','pnPlastic','pnFive','pnBuyMonths','pnBuyWage','pnBuyRate','pnOwedRest','pnLeaveDays'].forEach(id=>{
+        const e=document.getElementById(id); if(e)e.dispatchEvent(new Event('change',{bubbles:true}));
+      });
+      try { localStorage.clear(); sessionStorage.clear(); } catch(e) {}
+      window.alert('Τα προσωπικά στοιχεία και οι αποθηκευμένες βάρδιες μηδενίστηκαν.');
+    }); }
 
     document.querySelectorAll('input,select').forEach(el => {
       el.addEventListener('input', compute);
