@@ -1,4 +1,4 @@
-const CACHE_NAME = 'eidiko-froura-v49-holidays-fix-20261012';
+const CACHE_NAME = 'yefkk-2050-20261013-v1';
 const URLS_TO_CACHE = [
   './',
   './index.html',

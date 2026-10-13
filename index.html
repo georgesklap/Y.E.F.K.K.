@@ -17,12 +17,11 @@
   --pay:#ecfdf5;
   --ded:#fff7ed;
 
-  --p:#facc15;
-  --a:#16a34a;
-  --n:#dc2626;
-  --ad:#9ca3af;
-  --r:#2563eb;
-  --leave:#f97316;
+  --p:#8b5a2b;
+  --a:#f59e0b;
+  --n:#0b2a5b;
+  --ad:#74cfe6;
+  --r:#dc2626;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink)}
@@ -58,7 +57,7 @@ body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,
 .shiftRow{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
 .shiftBtn.active{box-shadow:0 0 0 4px rgba(59,130,246,.18)}
 .badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;border-radius:999px;min-width:46px;padding:6px 10px;font-size:12px;font-weight:1000}
-.bP{background:var(--p)} .bA{background:var(--a)} .bN{background:var(--n)} .bAD{background:var(--ad); color:#062033} .bR{background:var(--r)} .bLEAVE{background:var(--leave)} .bDELETE{background:#ffffff;color:#000000;border:1px solid #9ca3af} .bP{color:#422006}
+.bP{background:var(--p)} .bA{background:var(--a)} .bN{background:var(--n)} .bAD{background:var(--ad); color:#062033} .bR{background:var(--r)}
 .copyRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center;margin:8px 0 12px}
 .copyRow label{font-size:12px;font-weight:900;color:var(--muted)}
 .copyRow select{padding:10px;border-radius:14px;border:2px solid rgba(15,23,42,.25);background:#fff}
@@ -70,14 +69,12 @@ body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,
 .day.out{opacity:.45}
 .num{font-weight:1000}
 .mark{position:absolute;left:6px;right:6px;top:28px;display:flex;justify-content:center}
-.singleP,.singleA,.singleN,.singleAD,.singleR,.singleLEAVE,.splitTop,.splitBottom{display:flex;justify-content:center;align-items:center;color:#fff;font-size:12px;font-weight:1000;border-radius:10px;padding:6px 0;width:100%}
+.singleP,.singleA,.singleN,.singleAD,.singleR,.splitTop,.splitBottom{display:flex;justify-content:center;align-items:center;color:#fff;font-size:12px;font-weight:1000;border-radius:10px;padding:6px 0;width:100%}
 .singleP{background:var(--p)}
 .singleA{background:var(--a)}
 .singleN{background:var(--n)}
 .singleAD{background:var(--ad);color:#062033}
 .singleR{background:var(--r)}
-.singleLEAVE{background:var(--leave)}
-.singleP,.splitTop{color:#422006}
 .splitWrap{width:100%;display:flex;flex-direction:column;gap:4px}
 .splitTop{background:var(--p)}
 .splitBottom{background:var(--n)}
@@ -253,9 +250,14 @@ html,body{background:#102b50!important;color:#f8fafc;}
 body:not(:has(#pensionView[style*="display: block"])) #pensionView {display:none!important;}
 body:not(:has(#pensionView[style*="display: block"])) #salaryView {display:block!important;}
 body:has(#pensionView[style*="display: block"]) #salaryView {display:none!important;}
-}</style></head>
+}</style><style id="efapax-2026-styles">
+#efapaxView{background:#102b50;min-height:100vh;color:#172132}#efapaxView .panel{margin-bottom:15px}#efapaxView input,#efapaxView select{width:100%;padding:11px;border:1px solid #b9c8d8;border-radius:10px;font-size:16px;background:white;color:#172132}#efapaxView label{display:block;font-weight:700;font-size:14px;margin-bottom:5px}#efapaxView .ef-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}#efapaxView .ef-row{margin:8px 0}#efapaxView .ef-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}#efapaxView .ef-metric{background:#e6f0ff;border-radius:12px;padding:14px}#efapaxView .ef-metric strong{display:block;font-size:22px;margin-top:5px}#efapaxView .ef-table{overflow-x:auto}#efapaxView table{width:100%;border-collapse:collapse;min-width:580px}#efapaxView th,#efapaxView td{border-bottom:1px solid #dae2eb;padding:7px;text-align:left}#efapaxView th{background:#dbeafe}#efapaxView .ef-note{background:#fff4d9;padding:12px;border-radius:10px;margin:10px 0}#efapaxView button{border:1px solid #8ca3be;background:#dbeafe;border-radius:10px;padding:11px;font-weight:800;cursor:pointer}#efapaxView .ef-small{font-size:13px;color:#475569}#efapaxView .ef-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+@media print{body:has(#efapaxView[style*="display: block"]) #salaryView,body:has(#efapaxView[style*="display: block"]) #pensionView{display:none!important}body:has(#efapaxView[style*="display: block"]) #efapaxView{display:block!important;background:white!important}body:has(#efapaxView[style*="display: block"]) .calc-tabs,body:has(#efapaxView[style*="display: block"]) .ef-actions{display:none!important}}
+</style><style id="ef-unified-style">
+#efapaxView{max-width:1040px;margin:auto;padding:12px 12px 40px}#efapaxView .panel{padding:22px;border-radius:20px;box-shadow:0 8px 25px #081d3b18}#efapaxView .ef-hero{background:linear-gradient(130deg,#16345c,#23588a);color:#fff;border:1px solid #42658a}#efapaxView .ef-eyebrow{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:#c8def4;font-weight:800}#efapaxView .ef-hero h2{color:#fff;font-size:27px;margin:9px 0}#efapaxView .ef-hero h2 span{color:#b7d9ff}#efapaxView .ef-subtitle{color:#d2e4f8;font-size:14px}#efapaxView .ef-result-label{margin-top:25px;color:#c8def4;font-size:13px}#efapaxView .ef-big{font-size:clamp(32px,7vw,49px);font-weight:900;letter-spacing:-1px;margin:6px 0}#efapaxView .ef-status{font-size:12px;color:#d7e7fa}#efapaxView .ef-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}#efapaxView .ef-summary>div{background:#ffffff17;border:1px solid #ffffff24;border-radius:13px;padding:13px}#efapaxView .ef-summary small{display:block;color:#d1e1f5;font-size:12px}#efapaxView .ef-summary strong{display:block;color:#fff;font-size:21px;margin-top:6px}#efapaxView .ef-head{display:flex;justify-content:space-between;gap:10px;align-items:start}#efapaxView .ef-head h2{margin:0 0 5px}#efapaxView .ef-head p{margin:0;color:#65748a;font-size:13px}#efapaxView .ef-count{font-size:12px;color:#245b8f;background:#e8f2ff;border-radius:100px;padding:7px 9px;white-space:nowrap}#efapaxView .ef-compact{min-width:0;width:100%;font-size:14px}#efapaxView .ef-compact th{font-size:12px;color:#42607f;background:#eef5fc}#efapaxView .ef-compact td,#efapaxView .ef-compact th{padding:12px 8px}#efapaxView .ef-compact td:nth-child(2),#efapaxView .ef-compact td:nth-child(3){font-variant-numeric:tabular-nums;font-weight:650}#efapaxView .ef-year{font-weight:800;color:#1a3d63}#efapaxView .ef-dot{font-size:11px;border-radius:100px;padding:5px 8px;white-space:nowrap}#efapaxView .ef-ok{background:#e7f5ed;color:#20734b}#efapaxView .ef-guess{background:#fff1d9;color:#93600e}#efapaxView .ef-key{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#53677c;margin-top:14px}#efapaxView .ef-keydot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}#efapaxView .ef-verified{background:#4aa778}#efapaxView .ef-estimated{background:#e7aa4a}#efapaxView .ef-facts>div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #e3eaf2;padding:12px 0;font-size:13px}#efapaxView .ef-facts strong{text-align:right}#efapaxView .ef-disclaimer{color:#5a6b7f;font-size:12px;line-height:1.65;margin:18px 0}#efapaxView .ef-actions{margin:10px 0 0}#efapaxView .ef-actions button{background:#dbeafe;color:#17375d} @media(max-width:550px){#efapaxView{padding:8px}#efapaxView .panel{padding:17px}#efapaxView .ef-compact{font-size:12px}#efapaxView .ef-compact td,#efapaxView .ef-compact th{padding:10px 5px}#efapaxView .ef-dot{font-size:10px;padding:4px 5px}#efapaxView .ef-summary strong{font-size:17px}}@media print{#efapaxView .ef-hero{background:#fff!important;color:#111!important}#efapaxView .ef-hero *{color:#111!important}#efapaxView .ef-ledger tr{break-inside:avoid}}
+</style></head>
 <body>
-<div class="calc-tabs" style="margin-left:3%;margin-right:3%"><button type="button" class="calc-tab active" id="tabSalary">Υπολογιστής Μισθοδοσίας</button><button type="button" class="calc-tab" id="tabPension">Υπολογιστής Σύνταξης</button></div><div id="salaryView">  <div class="page">
+<div class="calc-tabs" style="margin-left:3%;margin-right:3%"><button type="button" class="calc-tab active" id="tabSalary">Υπολογιστής Μισθοδοσίας</button><button type="button" class="calc-tab" id="tabPension">Υπολογιστής Σύνταξης</button><button type="button" class="calc-tab" id="tabEfapax">Εφάπαξ</button></div><div id="salaryView">  <div class="page">
     <header class="topbar">
       <div class="brand">
         
@@ -499,13 +501,11 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
       </div>
 
       <div class="shiftRow">
-        <button class="shiftBtn active" data-shift="P" type="button" title="Πρωί"><span class="badge bP">Π</span></button>
-        <button class="shiftBtn" data-shift="A" type="button" title="Απόγευμα"><span class="badge bA">Α</span></button>
-        <button class="shiftBtn" data-shift="N" type="button" title="Νύχτα"><span class="badge bN">Ν</span></button>
-        <button class="shiftBtn" data-shift="AD" type="button" title="Αδιάθετο"><span class="badge bAD">Α/Δ</span></button>
-        <button class="shiftBtn" data-shift="R" type="button" title="Ρεπό"><span class="badge bR">Ρ</span></button>
-        <button class="shiftBtn" data-shift="LEAVE" type="button" title="Άδεια"><span class="badge bLEAVE">ΑΔΕΙΑ</span></button>
-        <button class="shiftBtn" data-shift="DELETE" type="button" title="Διαγραφή επιλεγμένης ημέρας"><span class="badge bDELETE">ΔΙΑΓ</span></button>
+        <button class="shiftBtn active" data-shift="P" type="button"><span class="badge bP">ΠΡ</span></button>
+        <button class="shiftBtn" data-shift="A" type="button"><span class="badge bA">ΑΠ</span></button>
+        <button class="shiftBtn" data-shift="N" type="button"><span class="badge bN">ΝΥ</span></button>
+        <button class="shiftBtn" data-shift="AD" type="button"><span class="badge bAD">ΑΔ</span></button>
+        <button class="shiftBtn" data-shift="R" type="button"><span class="badge bR">Ρ</span></button>
       </div>
 
       <div class="copyRow">
@@ -536,25 +536,6 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
       </div>
     </section>
 
-
-
-<section class="panel" id="repoPanel" style="margin-top:12px;padding:15px">
-<h2>Ρεπό &amp; Ώρες</h2>
-<div id="repoSummary" style="line-height:1.7;font-weight:600">—</div>
-<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Ρυθμίσεις υπολοίπων</summary>
-<div style="display:grid;grid-template-columns:1fr 90px;gap:8px;align-items:center;margin-top:10px">
-<label for="repoOpening">Αρχικά ρεπό</label><input id="repoOpening" type="number" step="1" value="0" style="width:85px">
-<label for="repoCorrection">Διόρθωση ρεπό (+/−)</label><input id="repoCorrection" type="number" step="1" value="0" style="width:85px">
-<label for="hoursOpening">Αρχικές ώρες</label><input id="hoursOpening" type="number" step="0.5" value="0" style="width:85px">
-<label for="hoursCorrection">Διόρθωση ωρών (+/−)</label><input id="hoursCorrection" type="number" step="0.5" value="0" style="width:85px">
-<label for="mayOverride">Μεταφορά Πρωτομαγιάς</label><input id="mayOverride" type="date" style="width:150px;max-width:100%">
-</div></details>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-<button id="backupExport" type="button">💾 Backup</button>
-<button id="backupImport" type="button">📂 Επαναφορά</button>
-<input type="file" id="backupFile" accept="application/json,.json" hidden>
-</div><p id="backupStatus" style="font-size:12px"></p>
-</section>
 
     <section class="panel panel-slip" id="printSlip">
       <h2>Εκκαθαριστικό</h2>
@@ -617,6 +598,10 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
     </footer>
   </div>
 </div>
+<div id="efapaxView" class="page" style="display:none">
+<section class="panel ef-hero"><div class="ef-eyebrow">Υ.Ε.Φ.Κ.Κ. · Ενιαίο μισθολόγιο</div><h2>Εφάπαξ <span>2000–2050</span></h2><div class="ef-subtitle">Από 20/07/2000 · Αυτόματος υπολογισμός από την ημερομηνία μισθοδοσίας</div><div class="ef-result-label">Ενδεικτικό ποσό</div><div class="ef-big" id="efTotalOut">—</div><div id="efStatus" class="ef-status" aria-live="polite">Υπολογισμός...</div><div class="ef-summary"><div><small>Πρώτο τμήμα</small><strong id="efPreOut">—</strong></div><div><small>Εισφορές 2014–έξοδος</small><strong id="efPostOut">—</strong></div></div></section>
+<section class="panel" style="padding:17px 19px;margin-bottom:14px"><div class="ef-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px"><div><label>Ημερομηνία υπολογισμού (από τη Μισθοδοσία)</label><div id="efLinkedDate" style="padding:12px 14px;background:#eaf2fc;border-radius:10px;font-weight:700;color:#17375c">—</div></div><div><label for="efFamilyScenario">Οικογενειακή κατηγορία ειδικού μισθολογίου</label><select id="efFamilyScenario"><option value="Άγαμος">Άγαμος / χωρίς επίδομα τέκνων</option><option value="Έγγαμος χωρίς παιδιά">Έγγαμος χωρίς παιδιά</option><option value="1 παιδί">1 παιδί</option><option value="2 παιδιά">2 παιδιά</option><option value="3 παιδιά">3 παιδιά</option><option value="4 παιδιά">4 παιδιά</option></select></div></div><p class="ef-small" style="margin-top:10px">Από το 2027 εφαρμόζονται τα κλιμάκια του ειδικού μισθολογίου, χωρίς γενικές αυξήσεις. Οι εισφορές παραμένουν εκτιμήσεις.</p></section><section class="panel ef-ledger"><div class="ef-head"><div><h2>Αποδοχές & εισφορές</h2><p>Ενιαίος πίνακας αποδοχών και εισφορών έως το έτος αποχώρησης.</p></div><span class="ef-count">1–40</span></div><div class="ef-table"><table class="ef-compact" id="efServiceTable"><thead><tr><th>Έτος υπηρεσίας</th><th>Μισθολογική βάση</th><th>Ετήσια εισφορά</th></tr></thead><tbody id="efServiceBody"></tbody></table><table class="ef-compact" id="efCalendarLedger" style="display:none"><thead><tr><th>Έτος υπηρεσίας</th><th>Μισθολογική βάση</th><th>Ετήσια εισφορά</th></tr></thead><tbody><tr><td class="ef-year">2000</td><td><span id="efWage2000">—</span></td><td><span id="efPay2000">—</span></td><span id="efSource2000" style="display:none"></span></tr><tr><td class="ef-year">2001</td><td><span id="efWage2001">—</span></td><td><span id="efPay2001">—</span></td><span id="efSource2001" style="display:none"></span></tr><tr><td class="ef-year">2002</td><td><span id="efWage2002">—</span></td><td><span id="efPay2002">—</span></td><span id="efSource2002" style="display:none"></span></tr><tr><td class="ef-year">2003</td><td><span id="efWage2003">—</span></td><td><span id="efPay2003">—</span></td><span id="efSource2003" style="display:none"></span></tr><tr><td class="ef-year">2004</td><td><span id="efWage2004">—</span></td><td><span id="efPay2004">—</span></td><span id="efSource2004" style="display:none"></span></tr><tr><td class="ef-year">2005</td><td><span id="efWage2005">—</span></td><td><span id="efPay2005">—</span></td><span id="efSource2005" style="display:none"></span></tr><tr><td class="ef-year">2006</td><td><span id="efWage2006">—</span></td><td><span id="efPay2006">—</span></td><span id="efSource2006" style="display:none"></span></tr><tr><td class="ef-year">2007</td><td><span id="efWage2007">—</span></td><td><span id="efPay2007">—</span></td><span id="efSource2007" style="display:none"></span></tr><tr><td class="ef-year">2008</td><td><span id="efWage2008">—</span></td><td><span id="efPay2008">—</span></td><span id="efSource2008" style="display:none"></span></tr><tr><td class="ef-year">2009</td><td><span id="efWage2009">—</span></td><td><span id="efPay2009">—</span></td><span id="efSource2009" style="display:none"></span></tr><tr><td class="ef-year">2010</td><td><span id="efWage2010">—</span></td><td><span id="efPay2010">—</span></td><span id="efSource2010" style="display:none"></span></tr><tr><td class="ef-year">2011</td><td><span id="efWage2011">—</span></td><td><span id="efPay2011">—</span></td><span id="efSource2011" style="display:none"></span></tr><tr><td class="ef-year">2012</td><td><span id="efWage2012">—</span></td><td><span id="efPay2012">—</span></td><span id="efSource2012" style="display:none"></span></tr><tr><td class="ef-year">2013</td><td><span id="efWage2013">—</span></td><td><span id="efPay2013">—</span></td><span id="efSource2013" style="display:none"></span></tr><tr><td class="ef-year">2014</td><td><span id="efWage2014">—</span></td><td><span id="efPay2014">—</span></td><span id="efSource2014" style="display:none"></span></tr><tr><td class="ef-year">2015</td><td><span id="efWage2015">—</span></td><td><span id="efPay2015">—</span></td><span id="efSource2015" style="display:none"></span></tr><tr><td class="ef-year">2016</td><td><span id="efWage2016">—</span></td><td><span id="efPay2016">—</span></td><span id="efSource2016" style="display:none"></span></tr><tr><td class="ef-year">2017</td><td><span id="efWage2017">—</span></td><td><span id="efPay2017">—</span></td><span id="efSource2017" style="display:none"></span></tr><tr><td class="ef-year">2018</td><td><span id="efWage2018">—</span></td><td><span id="efPay2018">—</span></td><span id="efSource2018" style="display:none"></span></tr><tr><td class="ef-year">2019</td><td><span id="efWage2019">—</span></td><td><span id="efPay2019">—</span></td><span id="efSource2019" style="display:none"></span></tr><tr><td class="ef-year">2020</td><td><span id="efWage2020">—</span></td><td><span id="efPay2020">—</span></td><span id="efSource2020" style="display:none"></span></tr><tr><td class="ef-year">2021</td><td><span id="efWage2021">—</span></td><td><span id="efPay2021">—</span></td><span id="efSource2021" style="display:none"></span></tr><tr><td class="ef-year">2022</td><td><span id="efWage2022">—</span></td><td><span id="efPay2022">—</span></td><span id="efSource2022" style="display:none"></span></tr><tr><td class="ef-year">2023</td><td><span id="efWage2023">—</span></td><td><span id="efPay2023">—</span></td><span id="efSource2023" style="display:none"></span></tr><tr><td class="ef-year">2024</td><td><span id="efWage2024">—</span></td><td><span id="efPay2024">—</span></td><span id="efSource2024" style="display:none"></span></tr><tr><td class="ef-year">2025</td><td><span id="efWage2025">—</span></td><td><span id="efPay2025">—</span></td><span id="efSource2025" style="display:none"></span></tr><tr><td class="ef-year">2026</td><td><span id="efWage2026">—</span></td><td><span id="efPay2026">—</span></td><span id="efSource2026" style="display:none"></span></tr><tr class="ef-future-row" data-year="2027"><td class="ef-year">2027</td><td><span id="efWage2027">—</span></td><td><span id="efPay2027">—</span></td></tr><tr class="ef-future-row" data-year="2028"><td class="ef-year">2028</td><td><span id="efWage2028">—</span></td><td><span id="efPay2028">—</span></td></tr><tr class="ef-future-row" data-year="2029"><td class="ef-year">2029</td><td><span id="efWage2029">—</span></td><td><span id="efPay2029">—</span></td></tr><tr class="ef-future-row" data-year="2030"><td class="ef-year">2030</td><td><span id="efWage2030">—</span></td><td><span id="efPay2030">—</span></td></tr><tr class="ef-future-row" data-year="2031"><td class="ef-year">2031</td><td><span id="efWage2031">—</span></td><td><span id="efPay2031">—</span></td></tr><tr class="ef-future-row" data-year="2032"><td class="ef-year">2032</td><td><span id="efWage2032">—</span></td><td><span id="efPay2032">—</span></td></tr><tr class="ef-future-row" data-year="2033"><td class="ef-year">2033</td><td><span id="efWage2033">—</span></td><td><span id="efPay2033">—</span></td></tr><tr class="ef-future-row" data-year="2034"><td class="ef-year">2034</td><td><span id="efWage2034">—</span></td><td><span id="efPay2034">—</span></td></tr><tr class="ef-future-row" data-year="2035"><td class="ef-year">2035</td><td><span id="efWage2035">—</span></td><td><span id="efPay2035">—</span></td></tr><tr class="ef-future-row" data-year="2036"><td class="ef-year">2036</td><td><span id="efWage2036">—</span></td><td><span id="efPay2036">—</span></td></tr><tr class="ef-future-row" data-year="2037"><td class="ef-year">2037</td><td><span id="efWage2037">—</span></td><td><span id="efPay2037">—</span></td></tr><tr class="ef-future-row" data-year="2038"><td class="ef-year">2038</td><td><span id="efWage2038">—</span></td><td><span id="efPay2038">—</span></td></tr><tr class="ef-future-row" data-year="2039"><td class="ef-year">2039</td><td><span id="efWage2039">—</span></td><td><span id="efPay2039">—</span></td></tr><tr class="ef-future-row" data-year="2040"><td class="ef-year">2040</td><td><span id="efWage2040">—</span></td><td><span id="efPay2040">—</span></td></tr><tr class="ef-future-row" data-year="2041"><td class="ef-year">2041</td><td><span id="efWage2041">—</span></td><td><span id="efPay2041">—</span></td></tr><tr class="ef-future-row" data-year="2042"><td class="ef-year">2042</td><td><span id="efWage2042">—</span></td><td><span id="efPay2042">—</span></td></tr><tr class="ef-future-row" data-year="2043"><td class="ef-year">2043</td><td><span id="efWage2043">—</span></td><td><span id="efPay2043">—</span></td></tr><tr class="ef-future-row" data-year="2044"><td class="ef-year">2044</td><td><span id="efWage2044">—</span></td><td><span id="efPay2044">—</span></td></tr><tr class="ef-future-row" data-year="2045"><td class="ef-year">2045</td><td><span id="efWage2045">—</span></td><td><span id="efPay2045">—</span></td></tr><tr class="ef-future-row" data-year="2046"><td class="ef-year">2046</td><td><span id="efWage2046">—</span></td><td><span id="efPay2046">—</span></td></tr><tr class="ef-future-row" data-year="2047"><td class="ef-year">2047</td><td><span id="efWage2047">—</span></td><td><span id="efPay2047">—</span></td></tr><tr class="ef-future-row" data-year="2048"><td class="ef-year">2048</td><td><span id="efWage2048">—</span></td><td><span id="efPay2048">—</span></td></tr><tr class="ef-future-row" data-year="2049"><td class="ef-year">2049</td><td><span id="efWage2049">—</span></td><td><span id="efPay2049">—</span></td></tr><tr class="ef-future-row" data-year="2050"><td class="ef-year">2050</td><td><span id="efWage2050">—</span></td><td><span id="efPay2050">—</span></td></tr></tbody></table></div></section>
+<section class="panel ef-bottom"><h2>Σύνοψη υπολογισμού</h2><div class="ef-facts"><div>Μέση βάση υπολογισμού <strong id="efAvgOut">—</strong></div><div>Ασφαλιστικός χρόνος πρώτου τμήματος <strong id="efYearsOut">—</strong></div><div>Συντελεστής υπολογισμού <strong>1,0000</strong></div></div><p class="ef-disclaimer">Τα ποσά είναι ενδεικτικοί υπολογισμοί και όχι βεβαιωμένες εισφορές ή ποσό απονομής.</p><div class="ef-actions"><button type="button" id="efPrint">Εκτύπωση / PDF</button></div></section></div>
 <div id="pensionView" class="page pension-native" style="display:none">
 <section class="panel pension-print-toolbar"><button class="printBtn" type="button" onclick="printCalculator('pension')">Εκκαθαριστικό / PDF</button></section>
 <section class="panel"><h2>🏛️ Υπολογιστής Σύνταξης</h2><p>Τα κοινά στοιχεία συμπληρώνονται αυτόματα από τη Μισθοδοσία. Τα υπόλοιπα τα καταχωρίζεις εδώ.</p></section>
@@ -628,9 +613,16 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
 <div class="field"><label>Ηλικία</label><input id="pnAge" type="number" readonly></div>
 <div class="field"><label>Ημέρες άλλων ταμείων</label><input id="pnOther" type="number" min="0" step="1" value="0"><small class="help">300 ημέρες = 1 έτος</small></div>
 <div class="field"><label>Πλασματικά / αναγνωρισμένα έτη</label><input id="pnPlastic" type="number" min="0" step="0.01" value="0"></div>
-<div class="field"><label>Αναγνώριση μάχιμης πενταετίας</label><select id="pnFive"><option value="no">Όχι</option><option value="yes">Ναι (+5 έτη)</option></select></div>
+<div class="field"><label>Αναγνώριση μάχιμης πενταετίας</label><select id="pnFive"><option value="0">Όχι (0 έτη)</option><option value="1">1 έτος</option><option value="2">2 έτη</option><option value="3">3 έτη</option><option value="4">4 έτη</option><option value="5">5 έτη</option></select></div>
+<div class="field"><label>Χρωστούμενα ρεπό (ημέρες)</label><input id="pnOwedRest" type="number" min="0" step="1" value="0"><small class="help">4 ρεπό ανά εβδομάδα χωρίς αργίες. Υπολογισμός προς τα πίσω από την ημερομηνία συνταξιοδότησης.</small></div>
+<div class="field"><label>Υπόλοιπο άδειας (ημερολογιακές ημέρες)</label><input id="pnLeaveDays" type="number" min="0" step="1" value="0"><small class="help">1 ημέρα άδειας = 1 ημερολογιακή ημέρα, ακόμη και Σαββατοκύριακα ή αργίες.</small></div>
 <div class="field"><label>Μέσες συντάξιμες αποδοχές (€)</label><input id="pnWage" type="number" min="0" step="0.01" value="0" readonly><small class="help" id="pnWageDetails">Αυτόματος υπολογισμός από τους πίνακες ενιαίου/ειδικού μισθολογίου του Οδηγού ΥΕΦΚΚ (μοντέλο εκτίμησης, όχι βεβαιωμένο ιστορικό αποδοχών).</small></div>
 </div><div class="pmetric">Σύνολο συντάξιμου χρόνου<strong id="pnTotal">—</strong><small id="pnBreak"></small></div></section>
+<section class="panel"><h2>Χρωστούμενα ρεπό &amp; υπόλοιπο άδειας</h2>
+<div class="pgrid"><div class="pmetric">Ημερομηνία συνταξιοδότησης <small id="pnRetireAge" style="font-size:12px;font-weight:500;color:#526071;white-space:nowrap">(ηλικία —)</small><strong id="pnRetireDate">—</strong></div><div class="pmetric">Ημερολογιακές ημέρες άδειας<strong id="pnLeaveSpan">0</strong></div><div class="pmetric">Ημερολογιακές ημέρες ρεπό<strong id="pnRestSpan">0</strong></div><div class="pmetric">Συνολικές ημέρες πριν τη συνταξιοδότηση<strong id="pnCombinedSpan">0</strong></div><div class="pmetric">Έναρξη συνεχόμενης απουσίας<strong id="pnAbsenceStart">—</strong></div><div class="pmetric">Τελευταία ημέρα παρουσίας<strong id="pnLastPresence">—</strong></div></div>
+<small class="help" id="pnRestInfo">Τα ρεπό υπολογίζονται ανά ημερολογιακή εβδομάδα (Δευτέρα–Κυριακή): 4 μείον τις αργίες της εβδομάδας, με αναλογικό επιμερισμό σε τμήματα εβδομάδας. Η άδεια αφαιρείται πρώτη από την ημερομηνία υπολογισμού και κατόπιν τα ρεπό. Δεν προστίθενται συντάξιμα χρόνια. Οι ημερομηνίες είναι ενδεικτικές και προϋποθέτουν έγκριση της υπηρεσίας.</small>
+</section>
+<section class="panel"><h2>Εξαγορά μάχιμης υπηρεσίας</h2><div class="pmetric">Μήνες αναγνώρισης<strong id="pnFiveMonths">0</strong></div><div class="pmetric">Μηνιαίο κόστος αναγνώρισης<strong>39,87 €</strong></div><div class="pmetric">Συνολικό κόστος εξαγοράς<strong id="pnFiveCost">0,00 €</strong></div><small class="help">Αυτόματος ενδεικτικός υπολογισμός: 39,87 € × 12 μήνες × επιλεγμένα έτη (0–5). Ποσό που αναγράφεται στην εφαρμογή Κερμανίδη και στις δημοσιευμένες οδηγίες για Σώματα Ασφαλείας. Η εφαρμογή του ίδιου ποσού στην ΥΕΦΚΚ χρειάζεται επιβεβαίωση από την αρμόδια υπηρεσία.</small></section>
 <section class="panel"><h2>2. Συνταξιοδοτικά σενάρια</h2><div class="pgrid"><div class="pmetric">37 έτη (σενάριο)<strong id="pn37">—</strong></div><div class="pmetric">60 ετών (παλαιό)<strong id="pn60">—</strong></div><div class="pmetric">35 + 5 (νέο)<strong id="pn40">—</strong></div></div><p class="help">Ενδεικτικά σενάρια του αρχικού Οδηγού. Δεν αποτελούν πιστοποίηση θεμελίωσης.</p></section>
 <section class="panel"><div class="notice-p"><strong>Έλεγχος 11/10/2026:</strong> Επαλήθευση ίδιων παραμέτρων: για 20/07/2000–11/10/2040, αλλαγή μόνο Οκτ.–Δεκ. 2026 δίνει μεταβολή μέσου όρου −2,43 € (άγαμος) ή −2,88 € (έγγαμος χωρίς παιδιά), όχι −27,81 €. Οι τιμές είναι ενδεικτικές. <strong>Νομική βάση (έλεγχος 11/10/2026):</strong> Ν. 4670/2020 άρθρο 24 — ακριβή κλιμάκια αναπλήρωσης και +0,50% ετησίως μετά τα 40. Εθνική σύνταξη 2026: 446,87 € (e-ΕΦΚΑ). Για 2027+ διατηρείται το γνωστό ποσό του 2026 χωρίς υποθετικές αυξήσεις. Οι μέσες αποδοχές δεν περιλαμβάνουν νόμιμη αναπροσαρμογή ιστορικών αποδοχών και ΔΕΝ αποτελούν πιστοποιημένη συντάξιμη βάση. Επικουρική, ΜΤΠΥ και συνολικά καθαρά: μόνο ενδεικτικά, όχι εκκαθάριση ή θεμελίωση δικαιώματος.</div></section>
 <section class="panel"><h2>3. Αναλυτικά αποτελέσματα</h2><div class="table-scroll"><table><thead><tr><th>Στοιχείο</th><th>37 έτη</th><th>40 έτη</th><th>Τρέχων χρόνος</th></tr></thead><tbody id="pnTable"></tbody></table></div></section>
@@ -1004,10 +996,10 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular - regularDeds) + extra
     mark.className = 'mark';
 
     if (val === 'PN'){
-      mark.innerHTML = '<div class="splitWrap"><div class="splitTop">Π</div><div class="splitBottom">Ν</div></div>';
+      mark.innerHTML = '<div class="splitWrap"><div class="splitTop">ΠΡ</div><div class="splitBottom">ΝΥ</div></div>';
     } else if (val) {
-      const cls = val === 'P' ? 'singleP' : val === 'A' ? 'singleA' : val === 'N' ? 'singleN' : val === 'AD' ? 'singleAD' : val === 'LEAVE' ? 'singleLEAVE' : 'singleR';
-      const label = val === 'P' ? 'Π' : val === 'A' ? 'Α' : val === 'N' ? 'Ν' : val === 'AD' ? 'Α/Δ' : val === 'LEAVE' ? 'ΑΔΕΙΑ' : 'Ρ';
+      const cls = val === 'P' ? 'singleP' : val === 'A' ? 'singleA' : val === 'N' ? 'singleN' : val === 'AD' ? 'singleAD' : 'singleR';
+      const label = val === 'P' ? 'ΠΡ' : val === 'A' ? 'ΑΠ' : val === 'N' ? 'ΝΥ' : val === 'AD' ? 'ΑΔ' : 'Ρ';
       mark.innerHTML = '<div class="' + cls + '">' + label + '</div>';
     }
     cell.appendChild(mark);
@@ -1027,10 +1019,6 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular - regularDeds) + extra
     const cur = shifts[key] || '';
     const sel = selectedShift;
 
-    if (sel === 'DELETE'){
-      delete shifts[key];
-      return;
-    }
     if (cur === sel){
       delete shifts[key];
       return;
@@ -1600,14 +1588,78 @@ function column(y,w,calcDate){let r=rate(y),a=r===null?null:w*r/100,n=nationalFu
  let e=y>=40?150:y>=37?130:145,m=120,g=a===null||n===null?null:n+a+e+m;
  return [r,n,a,e,m,g,g===null?null:g*.06,g===null?null:g*.94];}
 
-const keys=['pnOther','pnPlastic','pnFive','pnBuyMonths','pnBuyWage','pnBuyRate'];
+// Ενδεικτικό ελληνικό ημερολόγιο αργιών (εθνικές και συνήθεις κινητές).
+// Οι τοπικές/ειδικές υπηρεσιακές αργίες δεν περιλαμβάνονται.
+const MS=86400000;
+function isoDate(d){return d.toISOString().slice(0,10)}
+function utcDate(iso){return new Date(iso+'T00:00:00Z')}
+function shiftDays(d,n){return new Date(d.getTime()+n*MS)}
+function greekDate(d){return d.toLocaleDateString('el-GR',{timeZone:'UTC',day:'2-digit',month:'2-digit',year:'numeric'})}
+function orthodoxEaster(year){ // Meeus Julian computus, μετατροπή σε Γρηγοριανό
+ const a=year%4,b=year%7,c=year%19,d=(19*c+15)%30,e=(2*a+4*b-d+34)%7;
+ const month=Math.floor((d+e+114)/31),day=(d+e+114)%31+1;
+ const julianOffset=Math.floor(year/100)-Math.floor(year/400)-2;
+ return shiftDays(new Date(Date.UTC(year,month-1,day)),julianOffset);
+}
+const holidayCache=new Map();
+function greekHolidays(y){if(holidayCache.has(y))return holidayCache.get(y);
+ const set=new Set(['01-01','01-06','03-25','05-01','08-15','10-28','12-25','12-26'].map(md=>y+'-'+md));
+ const easter=orthodoxEaster(y);
+ for(const off of [-48,-2,1,50])set.add(isoDate(shiftDays(easter,off))); // Καθαρά Δευτέρα, Μεγάλη Παρασκευή, Δευτέρα Πάσχα, Αγίου Πνεύματος
+ holidayCache.set(y,set);return set;
+}
+function isHoliday(d){return greekHolidays(d.getUTCFullYear()).has(isoDate(d))}
+function weekStart(d){const wd=(d.getUTCDay()+6)%7;return shiftDays(d,-wd)}
+function restDaysBefore(end,owed){let remain=owed,days=0,holidays=0,weekCount=0;
+ let cursor=shiftDays(end,-1); // Η ημερομηνία σύνταξης δεν καταναλώνει ρεπό.
+ while(remain>1e-9&&days<36525){
+  const start=weekStart(cursor),endWeek=shiftDays(start,6);
+  let h=0;for(let i=0;i<7;i++)if(isHoliday(shiftDays(start,i)))h++;
+  const capacity=Math.max(0,4-h),portion=Math.round((cursor.getTime()-start.getTime())/MS)+1;
+  const credit=capacity*portion/7;
+  const consume=Math.min(remain,credit);
+  if(consume>0){const needed=Math.min(portion,Math.ceil(consume*7/capacity-1e-10));days+=needed;remain-=capacity*needed/7;}
+  else days+=portion;
+  if(h)holidays+=h;
+  weekCount++;
+  cursor=shiftDays(start,-1);
+ }
+ return {days,holidays,weekCount};
+}
+function calcRestLeave(){const iso=el('pnCalc').value,rest=Math.max(0,Math.floor(val('pnOwedRest'))),leave=Math.max(0,Math.floor(val('pnLeaveDays')));
+ if(!iso){for(const id of ['pnRetireDate','pnAbsenceStart','pnLastPresence'])el(id).textContent='—';el('pnRetireAge').textContent='(ηλικία —)';return;}
+ const retirement=utcDate(iso);
+ const info=restDaysBefore(retirement,rest),total=leave+info.days;
+ el('pnRetireDate').textContent=greekDate(retirement);
+ const birthISO=el('pnBirth').value;
+ if(/^\d{4}-\d{2}-\d{2}$/.test(birthISO)){
+  const born=utcDate(birthISO);
+  if(!Number.isNaN(born.getTime())&&born<=retirement){
+   let yy=retirement.getUTCFullYear()-born.getUTCFullYear();
+   let mm=retirement.getUTCMonth()-born.getUTCMonth();
+   let dd=retirement.getUTCDate()-born.getUTCDate();
+   if(dd<0){const prevMonthLast=new Date(Date.UTC(retirement.getUTCFullYear(),retirement.getUTCMonth(),0)).getUTCDate();dd+=prevMonthLast;mm--;}
+   if(mm<0){mm+=12;yy--;}
+   el('pnRetireAge').textContent=`(${yy} έτη, ${mm} μήνες, ${dd} ημέρες)`;
+  }else el('pnRetireAge').textContent='(ηλικία —)';
+ }else el('pnRetireAge').textContent='(ηλικία —)';
+ el('pnLeaveSpan').textContent=String(leave);
+ el('pnRestSpan').textContent=String(info.days);
+ el('pnCombinedSpan').textContent=String(total);
+ el('pnAbsenceStart').textContent=total?greekDate(shiftDays(retirement,-total)):'—';
+ el('pnLastPresence').textContent=total?greekDate(shiftDays(retirement,-total-1)):'—';
+ el('pnRestInfo').textContent=`Πρώτα υπολογίζονται τα ρεπό από την ημερομηνία συνταξιοδότησης και μετά αφαιρείται η άδεια: ${leave} ημερολογιακές ημέρες άδειας και ${rest} χρωστούμενα ρεπό = ${info.days} ημερολογιακές ημέρες για τα ρεπό. Κάθε πλήρης εβδομάδα πιστώνεται με 4 μείον τις αργίες της (τμήματα εβδομάδας αναλογικά). Περιλαμβάνονται οι πανελλαδικές σταθερές αργίες, Καθαρά Δευτέρα, Μεγάλη Παρασκευή, Δευτέρα Πάσχα και Αγίου Πνεύματος· όχι τοπικές/ειδικές αργίες. Η ημερομηνία συνταξιοδότησης και ο συντάξιμος χρόνος ΔΕΝ μεταβάλλονται. Η συνεχόμενη χορήγηση απαιτεί υπηρεσιακή έγκριση.`;
+}
+const keys=['pnOther','pnPlastic','pnFive','pnBuyMonths','pnBuyWage','pnBuyRate','pnOwedRest','pnLeaveDays'];
 try{let saved=JSON.parse(localStorage.getItem('eidiko_pension_fields')||'{}');keys.forEach(k=>{if(saved[k]!==undefined)el(k).value=saved[k]})}catch(e){}
 function sync(){el('pnBirth').value=el('birthDate')?.value||'';el('pnHire').value=el('hireDate')?.value||'';el('pnCalc').value=el('calcDate')?.value||'';el('pnYears').value=years(el('pnHire').value,el('pnCalc').value).toFixed(2);el('pnAge').value=Math.floor(years(el('pnBirth').value,el('pnCalc').value));}
-function calc(){sync();const avg=pensionHistoricalAverage(el('pnHire').value,el('pnCalc').value,el('family')?.value||'single',el('kids')?.value||0);el('pnWage').value=avg.avg===null?'':avg.avg.toFixed(2);el('pnWageDetails').textContent=avg.avg===null?'Δεν υπάρχουν διαθέσιμοι μήνες για υπολογισμό.':`Αυτόματα από τους πίνακες Οδηγού ΥΕΦΚΚ: ${avg.months} μήνες (ενιαίο ${avg.oldMonths}, ειδικό ${avg.newMonths}). Μισθολόγιο: ενιαίο έως 31/12/2026, ειδικό από 01/01/2027 (παραδοχή). Ο μέσος όρος εξαρτάται από την επιλεγμένη οικογενειακή κατάσταση και τα παιδιά· συγκρίσεις γίνονται μόνο με ίδια στοιχεία. ΠΡΟΣΟΧΗ: ενδεικτικά μεικτά, όχι επιβεβαιωμένες ασφαλιστέες αποδοχές. Δεν εφαρμόζεται ιστορική αναπροσαρμογή ΔΤΚ. Μετά το 2026 γίνεται στατική προβολή μισθολογίου, όχι πρόβλεψη πραγματικών αυξήσεων.`;let y=val('pnYears'),o=val('pnOther')/300,p=val('pnPlastic'),f=el('pnFive').value==='yes'?5:0,t=y+o+p+f,w=val('pnWage');el('pnTotal').textContent=fmt(t);el('pnBreak').textContent=`ΥΕΦΚΚ ${fmt(y)} + άλλα ταμεία ${fmt(o)} + πλασματικά ${fmt(p)} + μάχιμη ${f} έτη`;
+function calc(){sync();const avg=pensionHistoricalAverage(el('pnHire').value,el('pnCalc').value,el('family')?.value||'single',el('kids')?.value||0);el('pnWage').value=avg.avg===null?'':avg.avg.toFixed(2);el('pnWageDetails').textContent=avg.avg===null?'Δεν υπάρχουν διαθέσιμοι μήνες για υπολογισμό.':`Αυτόματα από τους πίνακες Οδηγού ΥΕΦΚΚ: ${avg.months} μήνες (ενιαίο ${avg.oldMonths}, ειδικό ${avg.newMonths}). Μισθολόγιο: ενιαίο έως 31/12/2026, ειδικό από 01/01/2027 (παραδοχή). Ο μέσος όρος εξαρτάται από την επιλεγμένη οικογενειακή κατάσταση και τα παιδιά· συγκρίσεις γίνονται μόνο με ίδια στοιχεία. ΠΡΟΣΟΧΗ: ενδεικτικά μεικτά, όχι επιβεβαιωμένες ασφαλιστέες αποδοχές. Δεν εφαρμόζεται ιστορική αναπροσαρμογή ΔΤΚ. Μετά το 2026 γίνεται στατική προβολή μισθολογίου, όχι πρόβλεψη πραγματικών αυξήσεων.`;let y=val('pnYears'),o=val('pnOther')/300,p=val('pnPlastic'),f=Math.max(0,Math.min(5,Number(el('pnFive').value)||0)),t=y+o+p+f,w=val('pnWage');el('pnTotal').textContent=fmt(t);el('pnBreak').textContent=`ΥΕΦΚΚ ${fmt(y)} + άλλα ταμεία ${fmt(o)} + πλασματικά ${fmt(p)} + μάχιμη ${f} έτη`;
 el('pn37').textContent=t>=37?'Συμπληρώθηκε ο χρόνος':fmt(Math.max(0,37-t))+' υπολείπονται';el('pn40').textContent=t>=40?'Συμπληρώθηκε ο χρόνος':fmt(Math.max(0,40-t))+' υπολείπονται';el('pn60').textContent=val('pnAge')>=60?'Συμπληρώθηκε η ηλικία':(60-val('pnAge'))+' έτη ηλικίας υπολείπονται';
 [30,35,37,40].forEach(yr=>{el('pnRate'+yr).textContent=rate(yr).toLocaleString('el-GR',{minimumFractionDigits:2,maximumFractionDigits:2})+'%';});
-let cols=[column(37,w,el('pnCalc').value),column(40,w,el('pnCalc').value),column(t,w,el('pnCalc').value)],names=['Ποσοστό αναπλήρωσης','Εθνική σύνταξη','Ανταποδοτική','Επικουρική (εκτίμηση)','ΜΤΠΥ (εκτίμηση)','Σύνολο μικτής','Υγειονομική περίθαλψη 6%','Μετά τις ασφαλιστικές κρατήσεις'];el('pnTable').innerHTML=names.map((name,i)=>'<tr><td>'+name+'</td>'+cols.map(c=>'<td>'+(i===0?(c[i]===null?'—':c[i].toFixed(2)+'%'):euro(c[i]))+'</td>').join('')+'</tr>').join('');
-let c=cols[2];el('pnCards').innerHTML=[['Εθνική σύνταξη',c[1]],['Ανταποδοτική',c[2]],['Επικουρική (εκτίμηση)',c[3]],['ΜΤΠΥ (εκτίμηση)',c[4]],['Σύνολο μικτής',c[5]],['Μετά τις ασφαλιστικές κρατήσεις',c[7]]].map(([k,v])=>'<div class="pmetric">'+k+'<strong>'+euro(v)+'</strong></div>').join('');el('pnBuyTotal').textContent=euro(val('pnBuyMonths')*val('pnBuyWage')*val('pnBuyRate')/100);
+let targets=[37,40,t],cols=targets.map(yr=>column(yr,w,el('pnCalc').value)),names=['Ποσοστό αναπλήρωσης','Εθνική σύνταξη','Ανταποδοτική','Επικουρική (εκτίμηση)','ΜΤΠΥ (εκτίμηση)','Σύνολο μικτής','Υγειονομική περίθαλψη 6%','Μετά τις ασφαλιστικές κρατήσεις'];
+const ikaImpact=targets.map(yr=>{if(o<=0||!Number.isFinite(w)||w<=0)return 0;const withIka=column(yr,w,el('pnCalc').value)[2];const withoutIka=column(Math.max(0,yr-o),w,el('pnCalc').value)[2];return Math.max(0,withIka-withoutIka)});
+el('pnTable').innerHTML=names.map((name,i)=>'<tr><td>'+name+'</td>'+cols.map(c=>'<td>'+(i===0?(c[i]===null?'—':c[i].toFixed(2)+'%'):euro(c[i]))+'</td>').join('')+'</tr>'+(i===2?'<tr><td>Επίδραση ενσήμων ΙΚΑ <small>(ενδεικτικά, περιλαμβάνεται στην ανταποδοτική)</small></td>'+ikaImpact.map(v=>'<td>+'+euro(v)+'</td>').join('')+'</tr>':'')).join('');
+let c=cols[2];el('pnCards').innerHTML=[['Εθνική σύνταξη',c[1]],['Ανταποδοτική',c[2]],['Επικουρική (εκτίμηση)',c[3]],['ΜΤΠΥ (εκτίμηση)',c[4]],['Σύνολο μικτής',c[5]],['Μετά τις ασφαλιστικές κρατήσεις',c[7]]].map(([k,v])=>'<div class="pmetric">'+k+'<strong>'+euro(v)+'</strong></div>').join('');calcRestLeave();el('pnFiveMonths').textContent=String(f*12);el('pnFiveCost').textContent=euro(f*12*39.87);el('pnBuyTotal').textContent=euro(val('pnBuyMonths')*val('pnBuyWage')*val('pnBuyRate')/100);
 try{localStorage.setItem('eidiko_pension_fields',JSON.stringify(Object.fromEntries(keys.map(k=>[k,el(k).value]))))}catch(e){}
 }
 function show(p){el('salaryView').style.display=p==='salary'?'':'none';el('pensionView').style.display=p==='pension'?'':'none';el('tabSalary').classList.toggle('active',p==='salary');el('tabPension').classList.toggle('active',p==='pension');if(p==='pension')calc();window.scrollTo(0,0)}
@@ -1763,115 +1815,87 @@ window.printCalculator=function(which){
  if(kind==='pension')$('tabPension')?.click();else $('tabSalary')?.click();
  const root=$('printPremiumRoot');
  root.innerHTML='<div class="pr-head"><h1>'+(kind==='pension'?'Εκκαθαριστικό Σύνταξης':'Εκκαθαριστικό Μισθοδοσίας')+'</h1><p>Εξωτερική Φρούρηση · '+(kind==='pension'?'Αναλυτική εκτίμηση συνταξιοδότησης':'Ειδικό μισθολόγιο')+'</p></div>'+(kind==='pension'?pension():salary())+'<div class="pr-foot">Εκτύπωση υπολογισμών εφαρμογής · '+new Date().toLocaleDateString('el-GR')+'</div>';
- // Print from an isolated document: the app's old receipt cannot enter this print job.
- const css=document.getElementById('premium-print-css').textContent+'\n'+document.getElementById('premium-print-isolation-fix').textContent;
- const printCss=css.replace(/@media print\s*\{/,'@media print {');
- const doc='<!doctype html><html lang="el"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+(kind==='salary'?'Εκκαθαριστικό Μισθοδοσίας':'Εκκαθαριστικό Σύνταξης')+'</title><style>html,body{margin:0;background:white;color:#172132}#printPremiumRoot{display:block!important;font-family:Arial,sans-serif;font-size:10px}'+printCss+'</style></head><body class="print-premium '+(kind==='salary'?'print-premium-salary':'')+'"><div id="printPremiumRoot">'+root.innerHTML+'</div>
-
-
-</body></html>';
- const oldFrame=document.getElementById('isolatedPrintFrame');if(oldFrame)oldFrame.remove();
- const frame=document.createElement('iframe');frame.id='isolatedPrintFrame';frame.setAttribute('title','Εκτύπωση PDF');frame.style.cssText='position:fixed;right:0;bottom:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none';
- document.body.appendChild(frame);printing=true;
- frame.onload=function(){try{frame.contentWindow.focus();frame.contentWindow.print()}catch(e){console.error('Print failed',e)}};
- frame.srcdoc=doc;
+ document.body.classList.remove('print-salary','print-pension','print-premium-salary');document.body.classList.add('print-premium');if(kind==='salary')document.body.classList.add('print-premium-salary');printing=true;
+ window.print();
 };
-window.addEventListener('afterprint',()=>{printing=false;});
+window.addEventListener('afterprint',()=>{document.body.classList.remove('print-premium','print-premium-salary');printing=false;});
 window.addEventListener('beforeprint',()=>{if(printing)return;});
 })();
 </script>
-
-<script>
-/* ΥΕΦΚΚ – πρόσθετο παρακολούθησης ρεπό/ωρών και ασφαλούς τοπικού backup */
-(function(){
-'use strict';
-const MAIN='eidiko_v22_state', EXTRA='yefkk_repo_v1';
-const $=id=>document.getElementById(id);
-const pad=n=>String(n).padStart(2,'0');
-const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-const dateFrom=s=>new Date(s+'T12:00:00');
-const defaults={repoOpening:0,repoCorrection:0,hoursOpening:0,hoursCorrection:0,mayOverrides:{}};
-let extras={...defaults};
-try { extras={...defaults,...JSON.parse(localStorage.getItem(EXTRA)||'{}')}; }catch(e){}
-function orthodoxEaster(y){ // Julian calendar Easter converted to Gregorian (valid 1900–2099)
- const a=y%4,b=y%7,c=y%19,d=(19*c+15)%30,e=(2*a+4*b-d+34)%7;
- const month=Math.floor((d+e+114)/31),day=(d+e+114)%31+1;
- const julian=new Date(y,month-1,day,12); julian.setDate(julian.getDate()+13);return julian;
+<script id="efapax-2026-js">(function(){'use strict';
+const $=id=>document.getElementById(id),fmt=n=>Number.isFinite(n)?n.toLocaleString('el-GR',{style:'currency',currency:'EUR',maximumFractionDigits:2}):'—';
+const colleague={2000:480,2001:500,2002:520,2003:559,2004:749,2005:806,2006:831,2007:862,2008:948,2009:1000,2010:1000,2011:1035,2012:1108,2013:1108};
+function projection(y){try{if(typeof pensionHistoricalAverage==='function'){const a=pensionHistoricalAverage('2000-07-20',y+'-12-31','single',0),b=pensionHistoricalAverage('2000-07-20',(y-1)+'-12-31','single',0);if(a&&a.months&&b&&b.months){const x=a.average*a.months-b.average*b.months,m=a.months-b.months;if(m>0&&x>0)return x/m}}}catch(e){}return null}
+const calcDateInput=$('calcDate');
+function selectedDate(){
+ const raw=calcDateInput?.value || new Date().toLocaleDateString('en-CA');
+ const d=/^(\d{4})-(\d{2})-(\d{2})$/.exec(raw);
+ if(!d)return {year:2026,month:12,day:31,iso:'2026-12-31'};
+ return {year:+d[1],month:+d[2],day:+d[3],iso:raw};
 }
-function holidays(y){
- const fixed=[[1,1,'Πρωτοχρονιά'],[1,6,'Θεοφάνεια'],[3,25,'25η Μαρτίου'],[8,15,'15 Αυγούστου'],[10,16,'Άγιος Λογγίνος'],[10,28,'28η Οκτωβρίου'],[12,25,'Χριστούγεννα'],[12,26,'26 Δεκεμβρίου']];
- const map=new Map(fixed.map(([m,d,n])=>[`${y}-${pad(m)}-${pad(d)}`,n]));
- const easter=orthodoxEaster(y);
- const cleanMonday=new Date(easter);cleanMonday.setDate(cleanMonday.getDate()-48);map.set(iso(cleanMonday),'Καθαρά Δευτέρα');
- const goodFriday=new Date(easter);goodFriday.setDate(goodFriday.getDate()-2);map.set(iso(goodFriday),'Μεγάλη Παρασκευή');
- map.set(iso(easter),'Κυριακή του Πάσχα');
- const easterMonday=new Date(easter);easterMonday.setDate(easterMonday.getDate()+1);map.set(iso(easterMonday),'Δευτέρα του Πάσχα');
- const may=extras.mayOverrides?.[y]||`${y}-05-01`;map.set(may,'Πρωτομαγιά');return map;
+const familySelect=$('efFamilyScenario');
+// Salary tables and step ranges are read directly from this PWA's data.js PAY_TABLE.
+function futureBase(y,fam,month){
+ const table=window.PAY_TABLE;if(!table||!Array.isArray(table.ranges)||!table.byStep)return null;
+ const service=(Date.UTC(y,month-1,15)-Date.UTC(2000,6,20))/(365.2425*86400000);
+ const step=table.ranges.find(r=>service>=r.from&&service<r.to)||table.ranges[table.ranges.length-1];
+ const salary=table.byStep[step.step]?.[fam];if(!salary)return null;
+ // Both salary models show TPDY at 4% of basic salary + eligible regular allowances.
+ return {base:Number(salary.base)||0,duty:Number(salary.duty)||0,child:Number(salary.child)||0,step:step.step,total:(Number(salary.base)||0)+(Number(salary.duty)||0)+(Number(salary.child)||0)};
 }
-function weekStart(date){const d=new Date(date);const day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return d;}
-function calc(){
- let s={};try{s=JSON.parse(localStorage.getItem(MAIN)||'{}')}catch(e){}
- const shifts=s.shifts||{};
- const year=s.calYear||new Date().getFullYear(),month=s.calMonth||new Date().getMonth()+1;
- const last=new Date(year,month,0,12), keys=Object.keys(shifts).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)).sort();
- const first=keys.length?dateFrom(keys[0]):new Date(year,0,1,12);
- let cursor=weekStart(first),end=weekStart(last);
- let earnedHoliday=0,earnedFive=0,repaid=0,hoursBalance=0;
- const isDuty=v=>['P','A','N','PN'].includes(v);
- const holidayCache={};const getH=y=>holidayCache[y]||(holidayCache[y]=holidays(y));
- while(cursor<=end){
-  let duties=0,leave=0,rests=0,weekHours=0;
-  for(let i=0;i<7;i++){
-   const d=new Date(cursor);d.setDate(cursor.getDate()+i);if(d>last)continue;
-   const k=iso(d),v=shifts[k];
-   if(isDuty(v)) {duties++;weekHours+=8.5;if(getH(d.getFullYear()).has(k))earnedHoliday++;}
-   if(v==='LEAVE')leave++;
-   if(v==='R')rests++;
+function render(){
+ const chosen=selectedDate(),end=Math.min(2050,Math.max(2000,chosen.year)),fam=familySelect.value;
+ const dateOut=$('efLinkedDate');if(dateOut)dateOut.textContent=chosen.iso.split('-').reverse().join('/');
+ const annual={},bases={};let last=colleague[2013];
+ for(let y=2000;y<=2050;y++){
+  let v,months=12,details=null;
+  if(y<=2013)v=colleague[y];
+  else if(y<=2026){v=projection(y);if(!(v>0))v=last*(y===2016?1.02:y===2024?1.04:y===2025?1.025:y===2026?1.025:1)}
+  else {const monthly=Array.from({length:12},(_,i)=>futureBase(y,fam,i+1));details=monthly[6];v=monthly.every(Boolean)?monthly.reduce((a,b)=>a+b.total,0)/12:NaN;}
+  if(y===2000)months=(Date.UTC(2001,0,1)-Date.UTC(2000,6,20))/(365.2425*86400000)*12;
+  // The final calendar year is accrued only through the chosen calculation date.
+  if(y===end && end>=2001 && end<=2050){
+    const maxDay=new Date(Date.UTC(end,chosen.month,0)).getUTCDate();
+    months=Math.max(0,Math.min(12,(chosen.month-1)+Math.min(chosen.day,maxDay)/maxDay));
   }
-  if(duties>=5)earnedFive+=Math.floor(duties/5);
-  // Confirmed example: 3 duty + 2 leave + 2 rests => one previously owed rest repaid.
-  if(duties===3&&leave===2&&rests>=2)repaid++;
-  // Hours are informational; do not subtract leave days from 34.5 without an agreed rule.
-  if(duties+leave+rests>=7) hoursBalance+=weekHours-34.5;
-  cursor.setDate(cursor.getDate()+7);
+  bases[y]=v;annual[y]=v*months*.04;
+  if(y<=2026&&Number.isFinite(v))last=v;
+  $('efWage'+y).textContent=fmt(v);$('efPay'+y).textContent=fmt(annual[y]);
+  const row=$('efWage'+y).closest('tr');if(row){row.style.display=y>end?'none':'';if(details)row.title='Μέση ετήσια βάση, με μηνιαίες αλλαγές κλιμακίου · κλιμάκιο Ιουλίου: '+details.step}
  }
- const balance=(+extras.repoOpening||0)+earnedHoliday+earnedFive-repaid+(+extras.repoCorrection||0);
- const hours=(+extras.hoursOpening||0)+hoursBalance+(+extras.hoursCorrection||0);
- $('repoSummary').innerHTML=`Οφειλόμενα ρεπό: ${balance}<br>Υπόλοιπο ωρών: ${hours.toFixed(1)}`;
- const grid=$('calGrid');if(grid){
-  grid.querySelectorAll('.day').forEach(cell=>{
-   const num=cell.querySelector('.num');if(!num)return;
-   // Date inferred by calendar position, including adjacent-month cells.
-   const index=Array.prototype.indexOf.call(grid.children,cell);
-   const firstOfMonth=new Date(year,month-1,1,12);
-   const offset=(firstOfMonth.getDay()+6)%7;
-   const d=new Date(year,month-1,1+index-offset,12);const name=getH(d.getFullYear()).get(iso(d));
-   cell.querySelectorAll('.holiday-marker').forEach(n=>n.remove());
-   if(name){const mark=document.createElement('div');mark.className='holiday-marker';mark.textContent=name;mark.title=name;mark.style.cssText='font-size:9px;color:#b91c1c;font-weight:bold;text-align:center';cell.appendChild(mark);}
-  });
+ // Display a maximum of 40 anniversary-based service years; retain calendar ledger for totals.
+ const serviceBody=$('efServiceBody');
+ if(serviceBody){
+  let html='';
+  const start=Date.UTC(2000,6,20),cutoff=Date.UTC(chosen.year,chosen.month-1,chosen.day+1);
+  for(let n=1;n<=40;n++){
+   const a=Date.UTC(1999+n,6,20),b=Date.UTC(2000+n,6,20);
+   if(a>=cutoff)break;
+   const stop=Math.min(b,cutoff);
+   let contribution=0,weightedBase=0,weight=0;
+   for(let y=2000;y<=2050;y++){
+    const ya=Date.UTC(y,0,1),yb=Date.UTC(y+1,0,1);
+    const overlap=Math.max(0,Math.min(stop,yb)-Math.max(a,ya));
+    if(!overlap||!Number.isFinite(bases[y]))continue;
+    const fraction=overlap/(yb-ya);
+    contribution+=bases[y]*.04*12*fraction;
+    weightedBase+=bases[y]*overlap;weight+=overlap;
+   }
+   html+='<tr><td class="ef-year">'+n+'</td><td>'+fmt(weight?weightedBase/weight:NaN)+'</td><td>'+fmt(contribution)+'</td></tr>';
+  }
+  serviceBody.innerHTML=html;
  }
+ const avg=[2009,2010,2011,2012,2013].reduce((a,y)=>a+bases[y],0)/5;
+ const years=(Date.UTC(2014,0,1)-Date.UTC(2000,6,20))/(365.2425*86400000);
+ const pre=avg*.6*years;
+ let post=0;for(let y=2014;y<=end;y++)post+=annual[y];
+ $('efAvgOut').textContent=fmt(avg);$('efYearsOut').textContent=years.toFixed(2).replace('.',',')+' έτη';
+ $('efPreOut').textContent=fmt(pre);$('efPostOut').textContent=fmt(post);$('efTotalOut').textContent=fmt(pre+post);
+ $('efStatus').textContent='Εκτίμηση έως '+chosen.iso.split('-').reverse().join('/')+' · 4% εισφορά · χωρίς μελλοντικές γενικές αυξήσεις ή αναπροσαρμογή εισφορών';
+ const sub=document.querySelector('#efapaxView .ef-subtitle');if(sub)sub.textContent='20/07/2000 – '+chosen.iso.split('-').reverse().join('/');
 }
-function store(){for(const k of ['repoOpening','repoCorrection','hoursOpening','hoursCorrection'])extras[k]=Number($(k).value)||0;localStorage.setItem(EXTRA,JSON.stringify(extras));calc();}
-function download(){
- const payload={format:'YEFKK_BACKUP_V1',createdAt:new Date().toISOString(),storage:{}};
- for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k)payload.storage[k]=localStorage.getItem(k);}
- const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='YEFKK_backup_'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('backupStatus').textContent='Δημιουργήθηκε αρχείο backup. Φύλαξέ το σε ασφαλές μέρος.';
-}
-async function restore(file){
- let data;try{data=JSON.parse(await file.text());if(data.format!=='YEFKK_BACKUP_V1'||!data.storage||typeof data.storage!=='object'||Array.isArray(data.storage))throw Error('Μη συμβατό αρχείο');}catch(e){alert('Μη έγκυρο backup: '+e.message);return;}
- if(!confirm('Η επαναφορά θα αντικαταστήσει τα τρέχοντα δεδομένα της εφαρμογής. Έχεις κρατήσει αντίγραφο;'))return;
- try{for(const [k,v] of Object.entries(data.storage)){if(typeof v!=='string')throw Error('Μη έγκυρη τιμή');}for(const [k,v] of Object.entries(data.storage))localStorage.setItem(k,v);alert('Η επαναφορά ολοκληρώθηκε. Η εφαρμογή θα επανεκκινήσει.');location.reload();}catch(e){alert('Σφάλμα επαναφοράς: '+e.message);}
-}
-document.addEventListener('DOMContentLoaded',()=>{
- for(const k of ['repoOpening','repoCorrection','hoursOpening','hoursCorrection']){$(k).value=extras[k]||0;$(k).addEventListener('change',store);}
- function refreshMay(){const s=JSON.parse(localStorage.getItem(MAIN)||'{}');const y=s.calYear||new Date().getFullYear();$('mayOverride').value=extras.mayOverrides?.[y]||'';}
- $('mayOverride').addEventListener('change',()=>{const s=JSON.parse(localStorage.getItem(MAIN)||'{}'),y=s.calYear||new Date().getFullYear();extras.mayOverrides=extras.mayOverrides||{};if($('mayOverride').value)extras.mayOverrides[y]=$('mayOverride').value;else delete extras.mayOverrides[y];localStorage.setItem(EXTRA,JSON.stringify(extras));calc();});
- $('backupExport').addEventListener('click',download);$('backupImport').addEventListener('click',()=>$('backupFile').click());$('backupFile').addEventListener('change',e=>{if(e.target.files[0])restore(e.target.files[0]);e.target.value='';});
- const grid=$('calGrid');if(grid){let scheduled=false;new MutationObserver(mutations=>{if(!mutations.some(m=>Array.from(m.addedNodes).some(n=>n.nodeType===1&&n.classList?.contains('day'))))return;if(!scheduled){scheduled=true;queueMicrotask(()=>{scheduled=false;calc();refreshMay();});}}).observe(grid,{childList:true});}
- $('prevMonth')?.addEventListener('click',()=>setTimeout(()=>{refreshMay();calc()},0));$('nextMonth')?.addEventListener('click',()=>setTimeout(()=>{refreshMay();calc()},0));refreshMay();calc();
-});
-})();
-</script>
-
-</body>
+calcDateInput?.addEventListener('change',render);calcDateInput?.addEventListener('input',render);familySelect.addEventListener('change',render);render();
+$('tabEfapax').addEventListener('click',()=>{$('salaryView').style.display='none';$('pensionView').style.display='none';$('efapaxView').style.display='block';['tabSalary','tabPension'].forEach(id=>$(id).classList.remove('active'));$('tabEfapax').classList.add('active');window.scrollTo(0,0)});
+['tabSalary','tabPension'].forEach(id=>$(id).addEventListener('click',()=>{$('efapaxView').style.display='none';$('tabEfapax').classList.remove('active')}));$('efPrint').onclick=()=>window.print();
+})();</script></body>
 </html>
