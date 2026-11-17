@@ -1,10 +1,8 @@
-const CACHE_NAME = 'yefkk-40-40-20261117-v1';
-const URLS_TO_CACHE = [
-  './',
-  './index.html',
-  './style.css?v=46',
-  './data.js?v=43',
-  './app.js?v=43',
+const CACHE_NAME = 'yefkk-48-20261118-v1';
+// Μόνο αρχεία που χρησιμοποιεί η εφαρμογή. Τα './' και './index.html' είναι υποχρεωτικά·
+// τα υπόλοιπα αποθηκεύονται ένα-ένα, ώστε ένα αρχείο που λείπει να μην ακυρώνει την εγκατάσταση.
+const REQUIRED_URLS = ['./', './index.html'];
+const OPTIONAL_URLS = [
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -17,7 +15,11 @@ const URLS_TO_CACHE = [
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(URLS_TO_CACHE)));
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) =>
+    cache.addAll(REQUIRED_URLS).then(() => Promise.all(
+      OPTIONAL_URLS.map((url) => cache.add(url).catch(() => undefined))
+    ))
+  ));
 });
 
 self.addEventListener('activate', (event) => {
@@ -33,8 +35,10 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cached) => {
       return cached || fetch(event.request).then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        if (response && response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
         return response;
       }).catch(() => cached);
     })
