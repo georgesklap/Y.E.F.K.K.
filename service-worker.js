@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yefkk-reset-clean-20261013-v3';
+const CACHE_NAME = 'yefkk-40-40-20261117-v1';
 const URLS_TO_CACHE = [
   './',
   './index.html',
