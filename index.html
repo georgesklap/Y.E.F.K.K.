@@ -640,7 +640,7 @@ body:has(#pensionView[style*="display: block"]) #salaryView {display:none!import
 <div class="field"><label>Ημέρες άλλων ταμείων</label><input id="pnOther" type="number" min="0" step="1" value="0"><small class="help">300 ημέρες = 1 έτος</small></div>
 <div class="field"><label>Πλασματικά / αναγνωρισμένα έτη</label><input id="pnPlastic" type="number" min="0" step="0.01" value="0"></div>
 <div class="field"><label>Πρώτη ασφάλιση για επικουρική</label><input id="pnSuppFirst" type="date"><small class="help">Κενό = ημερομηνία διορισμού. Συμπληρώνεται μόνο αν υπήρξε προηγούμενη επικουρική ασφάλιση (π.χ. ΙΚΑ-ΤΕΑΜ). Πρώτη ασφάλιση από 01/01/2022: ΤΕΚΑ.</small></div>
-<div class="field"><label>Προηγούμενη επικουρική έως 31/12/2014 (ημέρες)</label><input id="pnSuppPrev" type="number" min="0" step="1" value="0"><small class="help">Μόνο ημέρες βεβαιωμένες από e-ΕΦΚΑ. 300 ημέρες = 1 έτος.</small></div>
+<div class="field"><label>Προηγούμενη επικουρική έως 31/12/2014 (ημέρες)</label><input id="pnSuppPrev" type="number" min="0" step="1" value="0"><small class="help">Μόνο ημέρες βεβαιωμένες από e-ΕΦΚΑ. 300 ημέρες = 1 έτος.</small></div><div class="field"><label>Εξαρτώμενα τέκνα κατά τη σύνταξη (για φόρο)</label><select id="pnTaxKids"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select><small class="help">Μόνο για τον φόρο της σύνταξης.</small></div>
 <div class="field"><label>Αναγνώριση μάχιμης πενταετίας</label><select id="pnFive"><option value="0">Όχι (0 έτη)</option><option value="1">1 έτος</option><option value="2">2 έτη</option><option value="3">3 έτη</option><option value="4">4 έτη</option><option value="5">5 έτη</option></select></div>
 <div class="field"><label>Χρωστούμενα ρεπό (ημέρες)</label><input id="pnOwedRest" type="number" min="0" step="1" value="0"><small class="help">4 ρεπό ανά εβδομάδα χωρίς αργίες. Υπολογισμός προς τα πίσω από την ημερομηνία συνταξιοδότησης.</small></div>
 <div class="field"><label>Υπόλοιπο άδειας (ημερολογιακές ημέρες)</label><input id="pnLeaveDays" type="number" min="0" step="1" value="0"><small class="help">1 ημέρα άδειας = 1 ημερολογιακή ημέρα, ακόμη και Σαββατοκύριακα ή αργίες.</small></div>
@@ -1321,7 +1321,7 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular + bonus - regularDeds)
         insurance:'post93', family:'single', kids:'0', dependents:'0',
         birthDate:'', hireDate:'', preServiceMonths:'0',
         pnOther:'0', pnPlastic:'0', pnFive:'0', pnBuyMonths:'0',
-        pnOwedRest:'0', pnLeaveDays:'0', pnSuppFirst:'', pnSuppPrev:'0', repoOpening:'0', repoCorrection:'0', hoursOpening:'0', hoursCorrection:'0', mayOverride:''
+        pnOwedRest:'0', pnLeaveDays:'0', pnSuppFirst:'', pnSuppPrev:'0', pnTaxKids:'0', repoOpening:'0', repoCorrection:'0', hoursOpening:'0', hoursCorrection:'0', mayOverride:''
       };
       Object.entries(defaults).forEach(([id,value])=>{
         const element = document.getElementById(id);
@@ -1340,7 +1340,7 @@ if ($('slipNet')) $('slipNet').textContent = fmt((regular + bonus - regularDeds)
       renderCalendar();
       compute();
       // Recalculate the pension panel without retaining the previous user's values.
-      ['pnOther','pnPlastic','pnFive','pnBuyMonths','pnBuyWage','pnBuyRate','pnOwedRest','pnLeaveDays','pnSuppFirst','pnSuppPrev'].forEach(id=>{
+      ['pnOther','pnPlastic','pnFive','pnBuyMonths','pnBuyWage','pnBuyRate','pnOwedRest','pnLeaveDays','pnSuppFirst','pnSuppPrev','pnTaxKids'].forEach(id=>{
         const e=document.getElementById(id); if(e)e.dispatchEvent(new Event('change',{bubbles:true}));
       });
       try { localStorage.clear(); sessionStorage.clear(); } catch(e) {}
@@ -1892,6 +1892,14 @@ function supplementaryAndMtpy(hireStr,calcDate,birthStr,fam,kids,w,opt){
  const priorPost=first<hireStr&&hireStr>(oldInsured?'2015-01-01':'2014-01-01'); // εισφορές προηγούμενου εργοδότη μετά το 2014: άγνωστες
  return {supp,suppGross,mtpy,status:aUnknown?'partial':(priorPost?'partial':'ok')};
 }
+// Φόρος σύνταξης: ίδια κλίμακα και μείωση φόρου με τη μισθωτή εργασία (ν. 4172/2013 άρθρα 15–16, όπως ισχύει).
+// Φορολογητέο = 12 × (σύνταξη μετά την κράτηση υγείας 6%), ΜΤΠΥ περιλαμβάνεται. Σημερινή κλίμακα για κάθε έτος εξόδου.
+function pensionTax(annual,kids,year){const k=Math.max(0,Math.min(6,Number(kids)||0));
+ const R=[[.09,.09,.09,.09,0,0,0],[.20,.18,.16,.09,0,0,0],[.26,.24,.22,.20,.18,.16,.14],[.34,.34,.34,.34,.34,.34,.34],[.39,.39,.39,.39,.39,.39,.39],[.44,.44,.44,.44,.44,.44,.44]];
+ const r=R.map(x=>x[k]);if(year>=2027&&k>=3){r[0]=0;r[1]=0;}
+ const B=[10000,20000,30000,40000,60000,Infinity];let prev=0,tax=0;for(let i=0;i<B.length;i++){tax+=Math.max(0,Math.min(annual,B[i])-prev)*r[i];prev=B[i];if(annual<=B[i])break;}
+ let credit=k<=0?777:k===1?900:k===2?1120:k===3?1340:k===4?1580:k===5?1780:1780+(k-5)*220;
+ if(annual>12000&&k<5)credit=Math.max(0,credit-(annual-12000)*.02);return Math.max(0,tax-credit);}
 function column(y,w,calcDate,benefits){let r=rate(y),a=r===null?null:w*r/100,n=nationalFull(calcDate);
  if(y<15)n=null;else n*=1-.02*Math.max(0,20-y);
  // Η επικουρική εμφανίζεται μικτή (όπως εθνική/ανταποδοτική)· η κράτηση 6% (ν. 4334/2015)
@@ -1964,7 +1972,7 @@ function calcRestLeave(){const iso=el('pnCalc').value,rest=Math.max(0,Math.floor
  el('pnLastPresence').textContent=total?greekDate(shiftDays(retirement,-total-1)):'—';
  el('pnRestInfo').textContent=`Πρώτα υπολογίζονται τα ρεπό από την ημερομηνία συνταξιοδότησης και μετά αφαιρείται η άδεια: ${leave} ημερολογιακές ημέρες άδειας και ${rest} χρωστούμενα ρεπό = ${info.days} ημερολογιακές ημέρες για τα ρεπό. Κάθε πλήρης εβδομάδα πιστώνεται με 4 μείον τις αργίες της (τμήματα εβδομάδας αναλογικά). Περιλαμβάνονται οι πανελλαδικές σταθερές αργίες, Καθαρά Δευτέρα, Μεγάλη Παρασκευή, Δευτέρα Πάσχα και Αγίου Πνεύματος· όχι τοπικές/ειδικές αργίες. Η ημερομηνία συνταξιοδότησης και ο συντάξιμος χρόνος ΔΕΝ μεταβάλλονται. Η συνεχόμενη χορήγηση απαιτεί υπηρεσιακή έγκριση.`;
 }
-const keys=['pnOther','pnPlastic','pnFive','pnBuyMonths','pnBuyWage','pnBuyRate','pnOwedRest','pnLeaveDays','pnSuppFirst','pnSuppPrev'];
+const keys=['pnOther','pnPlastic','pnFive','pnBuyMonths','pnBuyWage','pnBuyRate','pnOwedRest','pnLeaveDays','pnSuppFirst','pnSuppPrev','pnTaxKids'];
 try{let saved=JSON.parse(localStorage.getItem('eidiko_pension_fields')||'{}');keys.forEach(k=>{if(saved[k]!==undefined)el(k).value=saved[k]})}catch(e){}
 function sync(){el('pnBirth').value=el('birthDate')?.value||'';el('pnHire').value=el('hireDate')?.value||'';el('pnCalc').value=el('calcDate')?.value||'';el('pnYears').value=years(el('pnHire').value,el('pnCalc').value).toFixed(2);el('pnAge').value=Math.floor(years(el('pnBirth').value,el('pnCalc').value));}
 function calc(){sync();const avg=pensionHistoricalAverage(el('pnHire').value,el('pnCalc').value,el('family')?.value||'single',el('kids')?.value||0);el('pnWage').value=avg.avg===null?'':avg.avg.toFixed(2);el('pnWageDetails').textContent=avg.avg===null?'Δεν υπάρχουν διαθέσιμοι μήνες για υπολογισμό.':`${avg.months} μήνες · πραγματικές βάσεις ${avg.realMonths} · εκτίμηση ${avg.estMonths+avg.modelMonths} · ειδικό μισθολόγιο ${avg.newMonths}${avg.realMonths+avg.estMonths?' · αναπροσαρμογή ΔΤΚ':''}`;let y=val('pnYears'),o=val('pnOther')/300,p=val('pnPlastic'),f=Math.max(0,Math.min(5,Number(el('pnFive').value)||0)),t=y+o+p+f,w=val('pnWage');el('pnTotal').textContent=fmt(t);el('pnBreak').textContent=`ΥΕΦΚΚ ${fmt(y)} + άλλα ταμεία ${fmt(o)} + πλασματικά ${fmt(p)} + μάχιμη ${f} έτη`;
@@ -1975,12 +1983,12 @@ el('pn37').textContent=t>=37?'Συμπληρώθηκε ο χρόνος':fmt(Math
 const exitFor=yr=>{const c=el('pnCalc').value,extra=Math.max(0,yr-t);if(!c||!extra)return c;const d=new Date(c+'T12:00:00');d.setTime(d.getTime()+extra*365.2425*86400000);return d.toISOString().slice(0,10);};
 // Ενιαία μεθοδολογία: για κάθε στήλη, μέσος συντάξιμος μισθός, επικουρική και ΜΤΠΥ έως την ίδια ημερομηνία εξόδου.
 const opt={suppFirst:el('pnSuppFirst')?.value||'',prevDays:val('pnSuppPrev'),pre93:el('insurance')?.value==='pre93'};
-let targets=[37,40,t],exits=targets.map(exitFor),ws=exits.map(d=>{if(!d||d===el('pnCalc').value)return w;const a=pensionHistoricalAverage(el('pnHire').value,d,el('family')?.value||'single',el('kids')?.value||0);return a.avg===null?w:a.avg;}),bens=targets.map((yr,i)=>supplementaryAndMtpy(el('pnHire').value,exits[i],el('pnBirth').value,el('family')?.value||'single',el('kids')?.value||0,ws[i],opt)),cols=targets.map((yr,i)=>column(yr,ws[i],el('pnCalc').value,bens[i])),names=['Ποσοστό αναπλήρωσης','Εθνική σύνταξη','Ανταποδοτική','Επικουρική (εκτίμηση)','ΜΤΠΥ (εκτίμηση)','Σύνολο μικτής','Υγειονομική περίθαλψη 6%','Μετά τις ασφαλιστικές κρατήσεις'];
+let targets=[37,40,t],exits=targets.map(exitFor),ws=exits.map(d=>{if(!d||d===el('pnCalc').value)return w;const a=pensionHistoricalAverage(el('pnHire').value,d,el('family')?.value||'single',el('kids')?.value||0);return a.avg===null?w:a.avg;}),bens=targets.map((yr,i)=>supplementaryAndMtpy(el('pnHire').value,exits[i],el('pnBirth').value,el('family')?.value||'single',el('kids')?.value||0,ws[i],opt)),cols=targets.map((yr,i)=>column(yr,ws[i],el('pnCalc').value,bens[i])),names=['Ποσοστό αναπλήρωσης','Εθνική σύνταξη','Ανταποδοτική','Επικουρική (εκτίμηση)','ΜΤΠΥ (εκτίμηση)','Σύνολο μικτής','Υγειονομική περίθαλψη 6%','Μετά τις ασφαλιστικές κρατήσεις','Φόρος εισοδήματος (μηνιαίος)','Καθαρό μετά φόρου'];{const tk=val('pnTaxKids');cols.forEach((c,i)=>{const net=c[7];if(typeof net!=='number'||!Number.isFinite(net)){c[8]=null;c[9]=null;return;}const yr=Number(String(exits[i]||el('pnCalc').value).slice(0,4));const tx=Math.round(pensionTax(12*net,tk,yr)/12*100)/100;c[8]=tx;c[9]=Math.round((net-tx)*100)/100;});}
 const ikaImpact=targets.map((yr,i)=>{if(o<=0||!Number.isFinite(w)||w<=0)return 0;const withIka=column(yr,ws[i],el('pnCalc').value,bens[i])[2];const withoutIka=column(Math.max(0,yr-o),ws[i],el('pnCalc').value,bens[i])[2];return Math.max(0,withIka-withoutIka)});
 const cell=v=>typeof v==='string'?v:euro(v),gd=d=>d?d.split('-').reverse().join('/'):'—';
 el('pnTable').innerHTML='<tr><td>Ημερομηνία εξόδου</td>'+exits.map(d=>'<td>'+gd(d)+'</td>').join('')+'</tr>'+names.map((name,i)=>'<tr><td>'+name+'</td>'+cols.map(c=>'<td>'+(i===0?(c[i]===null?'—':c[i].toFixed(2)+'%'):cell(c[i]))+'</td>').join('')+'</tr>'+(i===2?'<tr><td>Επίδραση ενσήμων ΙΚΑ <small>(ενδεικτικά, περιλαμβάνεται στην ανταποδοτική)</small></td>'+ikaImpact.map(v=>'<td>+'+euro(v)+'</td>').join('')+'</tr>':'')).join('');
-let c=cols[2];el('pnCards').innerHTML=[['Εθνική σύνταξη',c[1]],['Ανταποδοτική',c[2]],['Επικουρική (εκτίμηση)',c[3]],['ΜΤΠΥ (εκτίμηση)',c[4]],['Σύνολο μικτής',c[5]],['Μετά τις ασφαλιστικές κρατήσεις',c[7]]].map(([k,v])=>'<div class="pmetric">'+k+'<strong>'+cell(v)+'</strong></div>').join('');
-{const st=bens.map(b=>b.status);let note='Μελλοντικές ημερομηνίες εξόδου: πρόβλεψη σε σημερινές τιμές (εθνική σύνταξη 2026, χωρίς μελλοντικό ΔΤΚ).';
+let c=cols[2];el('pnCards').innerHTML=[['Εθνική σύνταξη',c[1]],['Ανταποδοτική',c[2]],['Επικουρική (εκτίμηση)',c[3]],['ΜΤΠΥ (εκτίμηση)',c[4]],['Σύνολο μικτής',c[5]],['Μετά τις ασφαλιστικές κρατήσεις',c[7]],['Καθαρό μετά φόρου',c[9]]].map(([k,v])=>'<div class="pmetric">'+k+'<strong>'+cell(v)+'</strong></div>').join('');
+{const st=bens.map(b=>b.status);let note='Μελλοντικές ημερομηνίες εξόδου: πρόβλεψη σε σημερινές τιμές (εθνική σύνταξη 2026, χωρίς μελλοντικό ΔΤΚ). Φόρος με τη σημερινή κλίμακα και μείωση φόρου.';
  if(st.includes('teka'))note+=' ΤΕΚΑ: ατομικός κεφαλαιοποιητικός λογαριασμός, δεν υπολογίζεται εδώ· τα σύνολα δεν τον περιλαμβάνουν.';
  if(st.includes('partial'))note+=' Η επικουρική δεν περιλαμβάνει τμήμα προηγούμενης ασφάλισης που δεν μπορεί να υπολογιστεί (χρειάζεται βεβαίωση e-ΕΦΚΑ).';
  if(el('pnColNote'))el('pnColNote').textContent=note;}calcRestLeave();el('pnFiveMonths').textContent=String(f*12);el('pnFiveCost').textContent=euro(f*12*39.87);el('pnBuyTotal').textContent=euro(val('pnBuyMonths')*val('pnBuyWage')*val('pnBuyRate')/100);
